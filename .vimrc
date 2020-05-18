@@ -40,7 +40,7 @@ call plug#end()
 colorscheme gruvbox "Sets colorscheme
 set background=dark
 
-" Helps detect your project root
+" Helps detect your git root
 if executable('rg')
     let g:rg_derive_root='true' 
 endif
@@ -66,6 +66,9 @@ nnoremap <leader>pv :wincmd v<bar> :Ex <bar> :vertical resize 30<CR>
 nnoremap <Leader>ps :Rg<SPACE>
 nnoremap <silent> <Leader>+ :vertical resize +5<CR>
 nnoremap <silent> <Leader>- :vertical resize -5<CR>
+
+vnoremap J :m '>+1<CR>gv=gv 
+vnoremap K :m '<-2<CR>gv=gv 
 
 nnoremap <silent> <Leader>gd :YcmCompleter GoTo<CR>
 nnoremap <silent> <Leader>gr :YcmCompleter GoToReferences<CR>
