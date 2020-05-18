@@ -13,20 +13,20 @@ set smartindent "Automatic indenting
 set nu "Line numbers!
 set nowrap "No wrapping
 set ignorecase
-set smartcase
+set smartcase "Case insensitive searching unless it makes sense to
 set noswapfile "No swapfiles!
 set nobackup "No backups!
 set undodir=~/.vim/undodir
 set undofile "Undos saved in above
-set incsearch
+set incsearch "Get results while you search
 
-set colorcolumn=80
+set colorcolumn=80 "Column at 80 characters
 highlight ColorColumn ctermbg=0 guibg=lightgrey
 
 "Plug, the plugin manager
 call plug#begin('~/.vim/plugged')
 
-Plug 'morhetz/gruvbox' "Color scheme
+Plug 'morhetz/gruvbox' "Best color scheme known to man
 Plug 'jremmen/vim-ripgrep'
 Plug 'tpope/vim-fugitive' "Diffs, logs, git blame
 Plug 'vim-utils/vim-man'
@@ -40,12 +40,15 @@ call plug#end()
 colorscheme gruvbox "Sets colorscheme
 set background=dark
 
+" Helps detect your project root
 if executable('rg')
     let g:rg_derive_root='true' 
 endif
 
+" Ignore stuff from search
 let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard']
 
+" Make the spacebar the leader key
 let mapleader = " "
 
 let g:netrw_browse_split = 2
@@ -65,4 +68,5 @@ nnoremap <silent> <Leader>+ :vertical resize +5<CR>
 nnoremap <silent> <Leader>- :vertical resize -5<CR>
 
 nnoremap <silent> <Leader>gd :YcmCompleter GoTo<CR>
-nnoremap <silent> <Leader>gr :YcmCompleter GoToReferences<CR>
+nnoremap <silent>k<Leader>gr :YcmCompleter GoToReferences<CR>
+
