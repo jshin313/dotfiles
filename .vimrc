@@ -68,5 +68,5 @@ nnoremap <silent> <Leader>+ :vertical resize +5<CR>
 nnoremap <silent> <Leader>- :vertical resize -5<CR>
 
 nnoremap <silent> <Leader>gd :YcmCompleter GoTo<CR>
-nnoremap <silent>k<Leader>gr :YcmCompleter GoToReferences<CR>
+nnoremap <silent> <Leader>gr :YcmCompleter GoToReferences<CR>
 
