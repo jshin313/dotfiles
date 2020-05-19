@@ -2,6 +2,7 @@
 " https://www.youtube.com/watch?v=n9k9scbTuvQ
 " Will probably change a bit as I become more pro at vim
 
+set encoding=utf-8
 syntax on " Syntax highlighting on
 
 set visualbell
@@ -34,7 +35,6 @@ Plug 'lyuts/vim-rtags' "C++
 Plug 'kien/ctrlp.vim' "File finding
 Plug 'ycm-core/YouCompleteMe' "Autocomplete
 Plug 'mbbill/undotree'
-Plug 'tpope/vim-fugitive' "Git integration
 Plug 'vim-airline/vim-airline' "Tells you what branch you're on and which file
 
 call plug#end()
@@ -69,11 +69,9 @@ nnoremap <Leader>ps :Rg<SPACE>
 nnoremap <silent> <Leader>+ :vertical resize +5<CR>
 nnoremap <silent> <Leader>- :vertical resize -5<CR>
 
-"Move text up or down
 vnoremap J :m '>+1<CR>gv=gv 
 vnoremap K :m '<-2<CR>gv=gv 
 
-"YouCompleteMe
 nnoremap <silent> <Leader>gd :YcmCompleter GoTo<CR>
 nnoremap <silent> <Leader>gr :YcmCompleter GoToReferences<CR>
 
