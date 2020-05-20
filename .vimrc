@@ -7,6 +7,7 @@
 "setxkbmap -option 'caps:ctrl_modifier'
 "xcape -e 'Caps_Lock=Escape' setxkbmap -option 'caps:ctrl_modifier'
 
+"or on windows https://github.com/fenwar/ahk-caps-ctrl-esc
 set encoding=utf-8
 syntax on " Syntax highlighting on
 
