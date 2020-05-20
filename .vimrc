@@ -2,6 +2,11 @@
 " https://www.youtube.com/watch?v=n9k9scbTuvQ
 " Will probably change a bit as I become more pro at vim
 
+"Note to self: Add the following on a new machine's .profile to map caps lock
+"to esc and to control when being used as a modifier
+"setxkbmap -option 'caps:ctrl_modifier'
+"xcape -e 'Caps_Lock=Escape' setxkbmap -option 'caps:ctrl_modifier'
+
 set encoding=utf-8
 syntax on " Syntax highlighting on
 
@@ -79,3 +84,4 @@ nnoremap <silent> <Leader>gr :YcmCompleter GoToReferences<CR>
 nmap <leader>gj :diffget //3<CR>
 nmap <leader>gf :diffget //2<CR>
 nmap <leader>gs :G<CR>
+
