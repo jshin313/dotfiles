@@ -11,6 +11,12 @@
 set encoding=utf-8
 syntax on " Syntax highlighting on
 
+if has('win32')
+    " Avoid mswin.vim making Ctrl-v act as paste
+    noremap <C-V> <C-V>
+    set backspace=indent,eol,start
+endif
+
 set visualbell
 set noerrorbells "No annoying sound effects when you go to the end of a line
 set tabstop=4 softtabstop=4
