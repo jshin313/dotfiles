@@ -2,7 +2,20 @@
 " https://www.youtube.com/watch?v=n9k9scbTuvQ
 " Will probably change a bit as I become more pro at vim
 
+"Note to self: Add the following on a new machine's .profile to map caps lock
+"to esc and to control when being used as a modifier
+"setxkbmap -option 'caps:ctrl_modifier'
+"xcape -e 'Caps_Lock=Escape' setxkbmap -option 'caps:ctrl_modifier'
+
+"or on windows https://github.com/fenwar/ahk-caps-ctrl-esc
+set encoding=utf-8
 syntax on " Syntax highlighting on
+
+if has('win32')
+    " Avoid mswin.vim making Ctrl-v act as paste
+    noremap <C-V> <C-V>
+    set backspace=indent,eol,start
+endif
 
 set visualbell
 set noerrorbells "No annoying sound effects when you go to the end of a line
@@ -13,20 +26,20 @@ set smartindent "Automatic indenting
 set nu "Line numbers!
 set nowrap "No wrapping
 set ignorecase
-set smartcase
+set smartcase "Case insensitive searching unless it makes sense to
 set noswapfile "No swapfiles!
 set nobackup "No backups!
 set undodir=~/.vim/undodir
 set undofile "Undos saved in above
-set incsearch
+set incsearch "Get results while you search
 
-set colorcolumn=80
+set colorcolumn=80 "Column at 80 characters
 highlight ColorColumn ctermbg=0 guibg=lightgrey
 
 "Plug, the plugin manager
 call plug#begin('~/.vim/plugged')
 
-Plug 'morhetz/gruvbox' "Color scheme
+Plug 'morhetz/gruvbox' "Best color scheme known to man
 Plug 'jremmen/vim-ripgrep'
 Plug 'tpope/vim-fugitive' "Diffs, logs, git blame
 Plug 'vim-utils/vim-man'
@@ -34,18 +47,22 @@ Plug 'lyuts/vim-rtags' "C++
 Plug 'kien/ctrlp.vim' "File finding
 Plug 'ycm-core/YouCompleteMe' "Autocomplete
 Plug 'mbbill/undotree'
+Plug 'vim-airline/vim-airline' "Tells you what branch you're on and which file
 
 call plug#end()
 
 colorscheme gruvbox "Sets colorscheme
 set background=dark
 
+" Helps detect your git root
 if executable('rg')
     let g:rg_derive_root='true' 
 endif
 
+" Ignore stuff from search
 let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard']
 
+" Make the spacebar the leader key
 let mapleader = " "
 
 let g:netrw_browse_split = 2
@@ -64,6 +81,15 @@ nnoremap <Leader>ps :Rg<SPACE>
 nnoremap <silent> <Leader>+ :vertical resize +5<CR>
 nnoremap <silent> <Leader>- :vertical resize -5<CR>
 
+vnoremap J :m '>+1<CR>gv=gv 
+vnoremap K :m '<-2<CR>gv=gv 
+
 nnoremap <silent> <Leader>gd :YcmCompleter GoTo<CR>
 nnoremap <silent> <Leader>gr :YcmCompleter GoToReferences<CR>
 tnoremap <Esc> <C-\><C-n>
+
+"Git fugitive
+nmap <leader>gj :diffget //3<CR>
+nmap <leader>gf :diffget //2<CR>
+nmap <leader>gs :G<CR>
+
