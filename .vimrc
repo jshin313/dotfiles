@@ -6,14 +6,7 @@
 "to esc and to control when being used as a modifier
 "setxkbmap -option 'caps:ctrl_modifier'
 "xcape -e 'Caps_Lock=Escape' setxkbmap -option 'caps:ctrl_modifier'
-
 "or on windows https://github.com/fenwar/ahk-caps-ctrl-esc
-
-if has('win32')
-    " Avoid mswin.vim making Ctrl-v act as paste
-    noremap <C-V> <C-V>
-    set backspace=indent,eol,start
-endif
 
 syntax on " Syntax highlighting on
 
@@ -26,15 +19,15 @@ set smartindent "Automatic indenting
 set nu "Line numbers!
 set nowrap "No wrapping
 set ignorecase
-set smartcase "Case insensitive searching unless it makes sense to
+set smartcase
 set noswapfile "No swapfiles!
 set nobackup "No backups!
 set undodir=~/.vim/undodir
 set undofile "Undos saved in above
-set incsearch "Get results while you search
+set incsearch
 set expandtab
 
-set colorcolumn=80 "Column at 80 characters
+set colorcolumn=80
 highlight ColorColumn ctermbg=0 guibg=lightgrey
 
 "Plug, the plugin manager
