@@ -17,6 +17,7 @@ set shiftwidth=4
 set expandtab "Spaces
 set smartindent "Automatic indenting
 set nu "Line numbers!
+set rnu "Relative Line numbers
 set nowrap "No wrapping
 set ignorecase
 set smartcase
