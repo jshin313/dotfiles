@@ -25,7 +25,8 @@ set noswapfile "No swapfiles!
 set nobackup "No backups!
 set undodir=~/.vim/undodir
 set undofile "Undos saved in above
-set incsearch
+set hlsearch "Highlight searched items
+"set incsearch
 set expandtab
 
 set colorcolumn=80
