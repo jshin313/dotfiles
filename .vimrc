@@ -8,14 +8,14 @@
 "xcape -e 'Caps_Lock=Escape' setxkbmap -option 'caps:ctrl_modifier'
 
 "or on windows https://github.com/fenwar/ahk-caps-ctrl-esc
-set encoding=utf-8
-syntax on " Syntax highlighting on
 
 if has('win32')
     " Avoid mswin.vim making Ctrl-v act as paste
     noremap <C-V> <C-V>
     set backspace=indent,eol,start
 endif
+
+syntax on " Syntax highlighting on
 
 set visualbell
 set noerrorbells "No annoying sound effects when you go to the end of a line
@@ -32,6 +32,7 @@ set nobackup "No backups!
 set undodir=~/.vim/undodir
 set undofile "Undos saved in above
 set incsearch "Get results while you search
+set expandtab
 
 set colorcolumn=80 "Column at 80 characters
 highlight ColorColumn ctermbg=0 guibg=lightgrey
@@ -39,15 +40,18 @@ highlight ColorColumn ctermbg=0 guibg=lightgrey
 "Plug, the plugin manager
 call plug#begin('~/.vim/plugged')
 
-Plug 'morhetz/gruvbox' "Best color scheme known to man
+Plug 'morhetz/gruvbox' "Color scheme
 Plug 'jremmen/vim-ripgrep'
 Plug 'tpope/vim-fugitive' "Diffs, logs, git blame
+Plug 'vim-airline/vim-airline' "Tells you what branch you're on and which file
 Plug 'vim-utils/vim-man'
 Plug 'lyuts/vim-rtags' "C++
-Plug 'kien/ctrlp.vim' "File finding
 Plug 'ycm-core/YouCompleteMe' "Autocomplete
+Plug 'neoclide/coc.nvim', {'branch': 'release'} "Another autocomplete
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim' "File finding
 Plug 'mbbill/undotree'
-Plug 'vim-airline/vim-airline' "Tells you what branch you're on and which file
+Plug 'suan/vim-instant-markdown', {'for': 'markdown'}
 
 call plug#end()
 
@@ -59,17 +63,12 @@ if executable('rg')
     let g:rg_derive_root='true' 
 endif
 
-" Ignore stuff from search
-let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard']
-
 " Make the spacebar the leader key
 let mapleader = " "
 
 let g:netrw_browse_split = 2
 let g:netrw_banner = 0
 let g:netrw_winsize = 25
-
-let g:ctrlp_use_caching = 0
 
 nnoremap <leader>h :wincmd h<CR>
 nnoremap <leader>j :wincmd j<CR>
@@ -81,15 +80,20 @@ nnoremap <Leader>ps :Rg<SPACE>
 nnoremap <silent> <Leader>+ :vertical resize +5<CR>
 nnoremap <silent> <Leader>- :vertical resize -5<CR>
 
+" Allows you to move a highlighted line up or down
 vnoremap J :m '>+1<CR>gv=gv 
 vnoremap K :m '<-2<CR>gv=gv 
 
-nnoremap <silent> <Leader>gd :YcmCompleter GoTo<CR>
-nnoremap <silent> <Leader>gr :YcmCompleter GoToReferences<CR>
+"nnoremap <silent> <Leader>gd :YcmCompleter GoTo<CR>
+"nnoremap <silent> <Leader>gr :YcmCompleter GoToReferences<CR>
+nmap <Leader>gd <Plug>(coc-definition)
+nmap <Leader>gr <Plug>(coc-references)
+nnoremap <C-p> :GFiles<CR> 
+
+" For terminal
 tnoremap <Esc> <C-\><C-n>
 
 "Git fugitive
 nmap <leader>gj :diffget //3<CR>
 nmap <leader>gf :diffget //2<CR>
 nmap <leader>gs :G<CR>
-
