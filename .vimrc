@@ -26,7 +26,7 @@ set nobackup "No backups!
 set undodir=~/.vim/undodir
 set undofile "Undos saved in above
 set hlsearch "Highlight searched items
-"set incsearch
+set noincsearch
 set expandtab
 
 set colorcolumn=80
@@ -47,6 +47,8 @@ Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim' "File finding
 Plug 'mbbill/undotree'
 Plug 'suan/vim-instant-markdown', {'for': 'markdown'}
+Plug 'tpope/vim-commentary', "Comments!
+Plug 'terryma/vim-multiple-cursors' "Multiple Cursors
 
 call plug#end()
 
