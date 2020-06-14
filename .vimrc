@@ -86,7 +86,13 @@ nmap <Leader>gr <Plug>(coc-references)
 nnoremap <C-p> :GFiles<CR> 
 
 " For terminal
+" Make esc enter normal mode for terminal mode
 tnoremap <Esc> <C-\><C-n>
+"When in terminal mode remove line numbers
+au TermOpen * setlocal listchars= nonumber norelativenumber
+au TermOpen * startinsert
+au BufEnter,BufWinEnter,WinEnter term://* startinsert
+au BufLeave term://* stopinsert
 
 "Git fugitive
 nmap <leader>gj :diffget //3<CR>
