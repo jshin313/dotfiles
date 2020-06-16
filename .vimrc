@@ -52,15 +52,15 @@ Plug 'jremmen/vim-ripgrep'
 Plug 'tpope/vim-fugitive' "Diffs, logs, git blame
 Plug 'vim-airline/vim-airline' "Tells you what branch you're on and which file
 Plug 'vim-utils/vim-man'
-Plug 'lyuts/vim-rtags' "C++
-Plug 'Valloric/YouCompleteMe', { 'do': './install.py --clangd-completer'}
+Plug 'ycm-core/YouCompleteMe'
 "Plug 'neoclide/coc.nvim', {'branch': 'release'} "Another autocomplete
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim' "File finding
 Plug 'mbbill/undotree'
-Plug 'suan/vim-instant-markdown', {'for': 'markdown'}
+"Plug 'suan/vim-instant-markdown', {'for': 'markdown'}
 Plug 'tpope/vim-commentary', "Comments!
 Plug 'terryma/vim-multiple-cursors' "Multiple Cursors
+Plug 'sheerun/vim-polyglot' "Support for a bunch of Languages
 
 call plug#end()
 
