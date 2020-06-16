@@ -62,6 +62,7 @@ Plug 'tpope/vim-commentary', "Comments!
 Plug 'terryma/vim-multiple-cursors' "Multiple Cursors
 Plug 'sheerun/vim-polyglot' "Support for a bunch of Languages
 
+Plug 'ThePrimeagen/vim-be-good', {'do': './install.sh'} "Game for vim
 call plug#end()
 
 colorscheme gruvbox "Sets colorscheme
