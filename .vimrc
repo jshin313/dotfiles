@@ -61,6 +61,8 @@ Plug 'mbbill/undotree'
 Plug 'tpope/vim-commentary', "Comments!
 Plug 'terryma/vim-multiple-cursors' "Multiple Cursors
 Plug 'sheerun/vim-polyglot' "Support for a bunch of Languages
+Plug 'psliwka/vim-smoothie' "Smooth scrolling
+Plug 'lervag/vimtex' "Latex stuff
 
 Plug 'ThePrimeagen/vim-be-good', {'do': './install.sh'} "Game for vim
 call plug#end()
@@ -114,3 +116,8 @@ au BufLeave term://* stopinsert
 nmap <leader>gj :diffget //3<CR>
 nmap <leader>gf :diffget //2<CR>
 nmap <leader>gs :G<CR>
+
+"Latex stuff
+let g:vimtex_view_general_viewer = 'sumatraPDF'
+let g:vimtex_view_general_options = '-reuse-instance @pdf'
+let g:vimtex_view_general_options_latexmk = '-reuse-instance'
