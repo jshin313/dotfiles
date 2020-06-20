@@ -43,6 +43,9 @@ set cmdheight=2 "Better display messages
 " " delays and poor user experience.
 set updatetime=300
 
+"For latex
+filetype plugin on
+autocmd Filetype tex setl updatetime=1
 
 "Plug, the plugin manager
 call plug#begin('~/.vim/plugged')
@@ -52,8 +55,8 @@ Plug 'jremmen/vim-ripgrep'
 Plug 'tpope/vim-fugitive' "Diffs, logs, git blame
 Plug 'vim-airline/vim-airline' "Tells you what branch you're on and which file
 Plug 'vim-utils/vim-man'
-Plug 'ycm-core/YouCompleteMe'
-"Plug 'neoclide/coc.nvim', {'branch': 'release'} "Another autocomplete
+"Plug 'ycm-core/YouCompleteMe'
+Plug 'neoclide/coc.nvim', {'branch': 'release'} "Another autocomplete
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim' "File finding
 Plug 'mbbill/undotree'
@@ -62,7 +65,9 @@ Plug 'tpope/vim-commentary', "Comments!
 Plug 'terryma/vim-multiple-cursors' "Multiple Cursors
 Plug 'sheerun/vim-polyglot' "Support for a bunch of Languages
 Plug 'psliwka/vim-smoothie' "Smooth scrolling
-Plug 'lervag/vimtex' "Latex stuff
+Plug 'xuhdev/vim-latex-live-preview', { 'for': 'tex' } "Latex
+Plug 'vim-pandoc/vim-pandoc' "Markdown
+Plug 'vim-pandoc/vim-pandoc-syntax' 
 
 Plug 'ThePrimeagen/vim-be-good', {'do': './install.sh'} "Game for vim
 call plug#end()
@@ -100,8 +105,13 @@ vnoremap K :m '<-2<CR>gv=gv
 nnoremap <C-p> :GFiles<CR> 
 
 """ Autocomplete Remaps
-nnoremap <silent> <Leader>gd :YcmCompleter GoTo<CR>
-nnoremap <silent> <Leader>gr :YcmCompleter GoToReferences<CR>
+"nnoremap <silent> <Leader>gd :YcmCompleter GoTo<CR>
+"nnoremap <silent> <Leader>gr :YcmCompleter GoToReferences<CR>
+" GoTo code navigation
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
 
 " For terminal
 " Make esc enter normal mode for terminal mode
@@ -109,8 +119,6 @@ tnoremap <Esc> <C-\><C-n>
 "When in terminal mode remove line numbers
 au TermOpen * setlocal listchars= nonumber norelativenumber
 au TermOpen * startinsert
-au BufEnter,BufWinEnter,WinEnter term://* startinsert
-au BufLeave term://* stopinsert
 
 "Git fugitive
 nmap <leader>gj :diffget //3<CR>
@@ -118,6 +126,8 @@ nmap <leader>gf :diffget //2<CR>
 nmap <leader>gs :G<CR>
 
 "Latex stuff
-let g:vimtex_view_general_viewer = 'sumatraPDF'
-let g:vimtex_view_general_options = '-reuse-instance @pdf'
-let g:vimtex_view_general_options_latexmk = '-reuse-instance'
+let g:livepreview_previewer = 'sumatraPDF'
+nmap <F12> :LLPStartPreview<CR>
+
+"Pandoc stuff
+au BufWritePost *.md nmap <leader>p :!pandoc -o %:r.pdf -t beamer % <CR><CR>
