@@ -107,7 +107,10 @@ nnoremap <C-p> :GFiles<CR>
 """ Autocomplete Remaps
 "nnoremap <silent> <Leader>gd :YcmCompleter GoTo<CR>
 "nnoremap <silent> <Leader>gr :YcmCompleter GoToReferences<CR>
+
 " GoTo code navigation
+" Make sure to download clangd for c
+" and jedi and pylint for python
 nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
