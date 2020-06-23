@@ -60,7 +60,6 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'} "Another autocomplete
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim' "File finding
 Plug 'mbbill/undotree'
-"Plug 'suan/vim-instant-markdown', {'for': 'markdown'}
 Plug 'tpope/vim-commentary', "Comments!
 Plug 'terryma/vim-multiple-cursors' "Multiple Cursors
 Plug 'sheerun/vim-polyglot' "Support for a bunch of Languages
@@ -68,6 +67,9 @@ Plug 'psliwka/vim-smoothie' "Smooth scrolling
 Plug 'xuhdev/vim-latex-live-preview', { 'for': 'tex' } "Latex
 Plug 'vim-pandoc/vim-pandoc' "Markdown
 Plug 'vim-pandoc/vim-pandoc-syntax' 
+Plug 'KeitaNakamura/tex-conceal.vim'
+Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
+"Plug 'sirver/ultisnips', { 'for': 'tex' } 
 
 Plug 'ThePrimeagen/vim-be-good', {'do': './install.sh'} "Game for vim
 call plug#end()
@@ -116,6 +118,17 @@ nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
 
+" use <tab> for trigger completion and navigate to the next complete item
+function! s:check_back_space() abort
+    let col = col('.') - 1
+    return !col || getline('.')[col - 1]  =~ '\s'
+endfunction
+
+inoremap <silent><expr> <tab>
+            \ pumvisible() ? "\<c-n>" :
+            \ <sid>check_back_space() ? "\<tab>" :
+            \ coc#refresh()
+
 " For terminal
 " Make esc enter normal mode for terminal mode
 tnoremap <Esc> <C-\><C-n>
@@ -131,6 +144,16 @@ nmap <leader>gs :G<CR>
 "Latex stuff
 let g:livepreview_previewer = 'sumatraPDF'
 nmap <F12> :LLPStartPreview<CR>
+set conceallevel=1
+let g:tex_conceal='abdmg'
+hi Conceal ctermbg=none
+"From the following link:
+"https://castel.dev/post/lecture-notes-1/
+"Too slow rn for my laptop
+" let g:UltisnipsExpandTrigger = '<tab>'
+" let g:UltiSnipsJumpForwardTrigger = '<tab>'
+" let g:UltiSnipsJumpBackwardTrigger = '<s-tab>'
 
-"Pandoc stuff
+" Markdown Stuff
 au BufWritePost *.md nmap <leader>p :!pandoc -o %:r.pdf -t beamer % <CR><CR>
+nmap <C-s> <Plug>MarkdownPreview
