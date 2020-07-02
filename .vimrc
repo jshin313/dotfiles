@@ -113,10 +113,10 @@ nnoremap <C-p> :GFiles<CR>
 " GoTo code navigation
 " Make sure to download clangd for c
 " and jedi and pylint for python
-nmap <silent> gd <Plug>(coc-definition)
-nmap <silent> gy <Plug>(coc-type-definition)
-nmap <silent> gi <Plug>(coc-implementation)
-nmap <silent> gr <Plug>(coc-references)
+nmap <silent><leader>gd <Plug>(coc-definition)
+nmap <silent><leader>gy <Plug>(coc-type-definition)
+nmap <silent><leader>gi <Plug>(coc-implementation)
+nmap <silent><leader>gr <Plug>(coc-references)
 
 " use <tab> for trigger completion and navigate to the next complete item
 function! s:check_back_space() abort
@@ -132,9 +132,12 @@ inoremap <silent><expr> <tab>
 " For terminal
 " Make esc enter normal mode for terminal mode
 tnoremap <Esc> <C-\><C-n>
-"When in terminal mode remove line numbers
-au TermOpen * setlocal listchars= nonumber norelativenumber
-au TermOpen * startinsert
+
+if has('nvim')
+    "When in terminal mode remove line numbers
+    au TermOpen * setlocal listchars= nonumber norelativenumber
+    au TermOpen * startinsert
+endif
 
 "Git fugitive
 nmap <leader>gj :diffget //3<CR>
