@@ -8,7 +8,7 @@
 "xcape -e 'Caps_Lock=Escape' setxkbmap -option 'caps:ctrl_modifier'
 "or on windows https://github.com/fenwar/ahk-caps-ctrl-esc
 
-" Make sure to create ~/undodir and ~/backupdir
+" Make sure to create ~/.vim/undodir and ~/.vim/backupdir
 
 syntax on " Syntax highlighting on
 
