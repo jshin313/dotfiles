@@ -25,7 +25,7 @@ echo -e "set runtimepath^=~/.vim runtimepath+=~/.vim/after \n \
      let &packpath = &runtimepath \n \
      source ~/.vimrc" > ~/.config/nvim/init.vim
 
-sudo npm install -g neovim
+npm install -g neovim
 
 nvim +PlugInstall +qall
 nvim +UpdateRemotePlugins +qall
@@ -33,7 +33,7 @@ nvim +UpdateRemotePlugins +qall
 # CoC
 sudo apt-get install clangd -y
 nvim +CocInstall coc-clangd +qall
-pip3 install jedi
+sudo apt-get install python3-jedi -y
 pip3 install pylint
 nvim +CocInstall coc-python +qall
 
