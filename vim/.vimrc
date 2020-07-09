@@ -3,10 +3,10 @@
 " Will probably change a bit as I become more pro at vim
 
 "Note to self: Add the following on a new machine's .profile to map caps lock
-"to esc and to control when being used as a modifier
+"to control when being used as a modifier
 "setxkbmap -option 'caps:ctrl_modifier'
-"xcape -e 'Caps_Lock=Escape' setxkbmap -option 'caps:ctrl_modifier'
-"or on windows https://github.com/fenwar/ahk-caps-ctrl-esc
+" or in https://superuser.com/questions/949385/map-capslock-to-control-in-windows-10
+
 
 " Make sure to create ~/.vim/undodir and ~/.vim/backupdir
 
@@ -160,3 +160,9 @@ hi Conceal ctermbg=none
 " Markdown Stuff
 au BufWritePost *.md nmap <leader>p :!pandoc -o %:r.pdf -t beamer % <CR><CR>
 nmap <C-s> <Plug>MarkdownPreview
+
+" Get rid of arrow keys
+noremap <Up> <nop>
+noremap <Down> <nop>
+noremap <Left> <nop>
+noremap <Right> <nop>
