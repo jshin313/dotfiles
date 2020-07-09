@@ -1,0 +1,9 @@
+[submodule "tmux/.tmux/plugins/tpm"]
+	path = tmux/.tmux/plugins/tpm
+	url = git@github.com:tmux-plugins/tpm
+[submodule "tmux/.tmux/plugins/tmux-sensible"]
+	path = tmux/.tmux/plugins/tmux-sensible
+	url = git@github.com:tmux-plugins/tmux-sensible
+[submodule "tmux/.tmux/plugins/tmux-gruvbox-truecolor"]
+	path = tmux/.tmux/plugins/tmux-gruvbox-truecolor
+	url = git@github.com:lawabidingcactus/tmux-gruvbox-truecolor
