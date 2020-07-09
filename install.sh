@@ -18,6 +18,7 @@ sudo apt-get install xdg-utils -y
 sudo apt-get install nodejs -y
 sudo apt-get install npm -y
 sudo apt-get install yarn -y
+sudo apt-get install ripgrep -y
 
 # Make nvim's config the same as regular vim
 mkdir -p ~/.config/nvim/init.vim
