@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 from pwn import *
 
@@ -8,20 +8,19 @@ port = 1337
 {bindings}
 
 context.binary = {bin_name}
-
+context.terminal = ["tmux", "splitw", "-h"]
 
 # Many built-in settings can be controlled on the command-line and show up
 # in "args".  For example, to dump all data sent/received, and disable ASLR
 # for all created processes...
 # ./exploit.py DEBUG NOASLR
 
-
 def start(argv=[], *a, **kw):
     '''Start the exploit against the target.'''
     if args.GDB:
-        return gdb.debug([exe] + argv, gdbscript=gdbscript, *a, **kw)
+        return gdb.debug([exe.path] + argv, gdbscript=gdbscript, *a, **kw)
     elif args.REMOTE:
-        return process(address, port)
+        return remote(address, port)
     else:
         return process({proc_args})
 
