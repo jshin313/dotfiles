@@ -17,12 +17,13 @@ context.terminal = ["tmux", "splitw", "-h"]
 
 def start(argv=[], *a, **kw):
     '''Start the exploit against the target.'''
-    if args.GDB:
-        return gdb.debug([exe.path] + argv, gdbscript=gdbscript, *a, **kw)
-    elif args.REMOTE:
+    if args.REMOTE:
         return remote(address, port)
     else:
-        return process({proc_args})
+        conn = process({proc_args})
+        if args.GDB:
+            gdb.attach(conn, gdbscript=gdbscript)
+        return conn
 
 # Specify your GDB script here for debugging
 # GDB will be launched if the exploit is run via e.g.

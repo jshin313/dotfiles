@@ -117,7 +117,12 @@ if ! shopt -oq posix; then
 fi
 
 set -o vi
+set show-mode-in-prompt on
 bind -m vi-command 'Control-l: clear-screen'
 bind -m vi-insert 'Control-l: clear-screen'
 
 alias pwninit='pwninit --template-path ~/.gdb/template.py'
+
+# Remove awful green highlighting for windows folders
+LS_COLORS='ow=01;36;40'
+export LS_COLORS
