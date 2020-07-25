@@ -8,7 +8,7 @@ port = 1337
 {bindings}
 
 context.binary = {bin_name}
-context.terminal = ["tmux", "splitw", "-h"]
+context.terminal = ["tmux", "new-window"]
 
 # Many built-in settings can be controlled on the command-line and show up
 # in "args".  For example, to dump all data sent/received, and disable ASLR
