@@ -43,10 +43,6 @@ set cmdheight=2 "Better display messages
 " " delays and poor user experience.
 set updatetime=300
 
-"For latex
-filetype plugin on
-autocmd Filetype tex setl updatetime=1
-
 "Plug, the plugin manager
 call plug#begin('~/.vim/plugged')
 
@@ -64,7 +60,7 @@ Plug 'tpope/vim-commentary', "Comments!
 Plug 'terryma/vim-multiple-cursors' "Multiple Cursors
 Plug 'sheerun/vim-polyglot' "Support for a bunch of Languages
 Plug 'psliwka/vim-smoothie' "Smooth scrolling
-Plug 'xuhdev/vim-latex-live-preview', { 'for': 'tex' } "Latex
+Plug 'lervag/vimtex'
 Plug 'vim-pandoc/vim-pandoc' "Markdown
 Plug 'vim-pandoc/vim-pandoc-syntax' 
 Plug 'KeitaNakamura/tex-conceal.vim'
@@ -144,12 +140,17 @@ nmap <leader>gj :diffget //3<CR>
 nmap <leader>gf :diffget //2<CR>
 nmap <leader>gs :G<CR>
 
+"For latex
+filetype plugin on
+autocmd Filetype tex setl updatetime=1
+
 "Latex stuff
 "https://medium.com/@Pirmin/a-minimal-latex-setup-on-windows-using-wsl2-and-neovim-51259ff94734
-let g:livepreview_previewer = 'sumatraPDF'
+let g:vimtex_view_general_viewer = 'sumatraPDF'
 let g:vimtex_view_general_options = '-reuse-instance @pdf'
 let g:vimtex_view_general_options_latexmk = '-reuse-instance'
-map <F12> :LLPStartPreview<CR>
+let g:tex_flavor = 'latex'
+
 set conceallevel=1
 let g:tex_conceal='abdmg'
 hi Conceal ctermbg=none
