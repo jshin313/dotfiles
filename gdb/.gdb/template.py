@@ -20,9 +20,10 @@ def start(argv=[], *a, **kw):
     if args.REMOTE:
         return remote(address, port)
     else:
-        conn = process({proc_args})
         if args.GDB:
-            gdb.attach(conn, gdbscript=gdbscript)
+            conn = gdb.debug({proc_args}, gdbscript=gdbscript)
+        else:
+            conn = process({proc_args})
         return conn
 
 # Specify your GDB script here for debugging

@@ -145,8 +145,11 @@ nmap <leader>gf :diffget //2<CR>
 nmap <leader>gs :G<CR>
 
 "Latex stuff
+"https://medium.com/@Pirmin/a-minimal-latex-setup-on-windows-using-wsl2-and-neovim-51259ff94734
 let g:livepreview_previewer = 'sumatraPDF'
-nmap <F12> :LLPStartPreview<CR>
+let g:vimtex_view_general_options = '-reuse-instance @pdf'
+let g:vimtex_view_general_options_latexmk = '-reuse-instance'
+map <F12> :LLPStartPreview<CR>
 set conceallevel=1
 let g:tex_conceal='abdmg'
 hi Conceal ctermbg=none
