@@ -2,7 +2,7 @@ sudo apt-get update
 sudo apt-get upgrade -y
 
 sudo apt-get install stow -y
-stow gdb git tmux vim bash
+stow gdb git tmux vim bash latexmk
 
 sudo apt-get install vim -y
 
