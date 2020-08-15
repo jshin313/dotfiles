@@ -6,6 +6,7 @@ stow gdb
 stow git
 stow tmux
 stow vim
+rm ~/.bashrc
 stow bash
 stow latexmk
 
