@@ -2,7 +2,7 @@
 
 ## Installation
 ```console
-$ git clone git@github.com:jshin313/dotfiles .dotfiles
+$ git clone --recurse-submodules -j8 https://github.com/jshin313/dotfiles ~/.dotfiles
 $ cd .dotfiles
 $ ./install.sh
 ```
