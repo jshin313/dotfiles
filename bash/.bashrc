@@ -126,3 +126,9 @@ alias pwninit='pwninit --template-path ~/.gdb/template.py'
 # Remove awful green highlighting for windows folders
 LS_COLORS='ow=01;36;40'
 export LS_COLORS
+
+if grep -q microsoft /proc/version; then
+    echo "Ubuntu on Windows"
+else
+    setxkbmap -option 'caps:ctrl_modifier'
+fi
