@@ -126,3 +126,6 @@ alias pwninit='pwninit --template-path ~/.gdb/template.py'
 # Remove awful green highlighting for windows folders
 LS_COLORS='ow=01;36;40'
 export LS_COLORS
+
+export CEDEV=~/CEdev && export PATH=~/CEdev/bin:$PATH
+

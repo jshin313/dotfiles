@@ -150,6 +150,7 @@ let g:vimtex_view_general_viewer = 'sumatraPDF'
 let g:vimtex_view_general_options = '-reuse-instance @pdf'
 let g:vimtex_view_general_options_latexmk = '-reuse-instance'
 let g:tex_flavor = 'latex'
+let g:vimtex_quickfix_enabled = 0
 
 set conceallevel=1
 let g:tex_conceal='abdmg'
