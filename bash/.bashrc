@@ -129,3 +129,8 @@ export LS_COLORS
 
 export CEDEV=~/CEdev && export PATH=~/CEdev/bin:$PATH
 
+if grep -q microsoft /proc/version; then
+    echo "Ubuntu on Windows"
+else
+    setxkbmap -option 'caps:ctrl_modifier'
+fi

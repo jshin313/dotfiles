@@ -2,7 +2,13 @@ sudo apt-get update
 sudo apt-get upgrade -y
 
 sudo apt-get install stow -y
-stow gdb git tmux vim bash latexmk
+stow gdb
+stow git
+stow tmux
+stow vim
+rm ~/.bashrc
+stow bash
+stow latexmk
 
 sudo apt-get install vim -y
 
@@ -20,9 +26,10 @@ sudo apt-get install npm -y
 sudo apt-get install yarn -y
 sudo apt-get install ripgrep -y
 sudo apt-get install elfutils -y
+sudo apt-get install python3-pip -y
 
 # Make nvim's config the same as regular vim
-mkdir -p ~/.config/nvim/init.vim
+mkdir -p ~/.config/nvim/
 echo -e "set runtimepath^=~/.vim runtimepath+=~/.vim/after \n \
      let &packpath = &runtimepath \n \
      source ~/.vimrc" > ~/.config/nvim/init.vim
