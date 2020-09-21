@@ -171,3 +171,10 @@ noremap <Up> <nop>
 noremap <Down> <nop>
 noremap <Left> <nop>
 noremap <Right> <nop>
+
+" For vim debugging
+let g:termdebug_wide=1
+packadd termdebug
+" Add mappings for :Step and :Over
+noremap <silent> <leader>s :Step<cr>
+noremap <silent> <leader>o :Over<cr>
