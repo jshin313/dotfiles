@@ -45,6 +45,7 @@ nvim +CocInstall coc-clangd +qall
 pip3 install jedi
 pip3 install pylint
 nvim +CocInstall coc-python +qall
+nvim +CocInstall coc-pairs +qall
 
 # Markdown
 mkdir -p ~/.local/lib/github-markdown-css/
