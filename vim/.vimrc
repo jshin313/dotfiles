@@ -16,7 +16,7 @@ set visualbell
 set noerrorbells "No annoying sound effects when you go to the end of a line
 set tabstop=4 softtabstop=4
 set shiftwidth=4
-set expandtab "Spaces
+" No spaces now: set expandtab "Spaces
 set smartindent "Automatic indenting
 set nu "Line numbers!
 set rnu "Relative Line numbers
@@ -32,7 +32,6 @@ set undodir=~/.vim/undodir
 set undofile "Undos saved in above
 set hlsearch "Highlight searched items
 set noincsearch
-set expandtab
 set colorcolumn=80
 highlight ColorColumn ctermbg=0 guibg=lightgrey
 
@@ -67,7 +66,12 @@ Plug 'KeitaNakamura/tex-conceal.vim'
 Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
 "Plug 'sirver/ultisnips', { 'for': 'tex' } 
 
+Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } }
+
 Plug 'ThePrimeagen/vim-be-good', {'do': './install.sh'} "Game for vim
+
+Plug 'chrisbra/csv.vim'
+
 call plug#end()
 
 colorscheme gruvbox "Sets colorscheme
@@ -146,9 +150,22 @@ autocmd Filetype tex setl updatetime=1
 
 "Latex stuff
 "https://medium.com/@Pirmin/a-minimal-latex-setup-on-windows-using-wsl2-and-neovim-51259ff94734
-let g:vimtex_view_general_viewer = 'sumatraPDF'
-let g:vimtex_view_general_options = '-reuse-instance @pdf'
-let g:vimtex_view_general_options_latexmk = '-reuse-instance'
+
+" Detect if in WSL based on https://stackoverflow.com/a/57015339
+let uname = substitute(system('uname'),'\n','','')
+if uname == 'Linux'
+    let lines = readfile("/proc/version")
+    if lines[0] =~ "Microsoft"
+        let g:vimtex_view_general_viewer = 'sumatraPDF'
+        let g:vimtex_view_general_options = '-reuse-instance @pdf'
+        let g:vimtex_view_general_options_latexmk = '-reuse-instance'
+    endif
+else
+    let g:vimtex_view_general_viewer = 'zathura'
+    let g:vimtex_view_general_options = ''
+    let g:vimtex_view_general_options_latexmk = ''
+endif
+
 let g:tex_flavor = 'latex'
 let g:vimtex_quickfix_enabled = 0
 
