@@ -195,3 +195,6 @@ packadd termdebug
 " Add mappings for :Step and :Over
 noremap <silent> <leader>s :Step<cr>
 noremap <silent> <leader>o :Over<cr>
+
+" For cobol files
+autocmd FileType cobol set sw=4 sts=4 et sta tw=72

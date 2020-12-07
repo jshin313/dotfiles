@@ -134,3 +134,4 @@ if grep -q microsoft /proc/version; then
 else
     setxkbmap -option 'caps:ctrl_modifier'
 fi
+source "$HOME/.cargo/env"
