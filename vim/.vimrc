@@ -64,6 +64,7 @@ Plug 'vim-pandoc/vim-pandoc' "Markdown
 Plug 'vim-pandoc/vim-pandoc-syntax' 
 Plug 'KeitaNakamura/tex-conceal.vim'
 Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
+Plug 'tmux-plugins/vim-tmux-focus-events'
 "Plug 'sirver/ultisnips', { 'for': 'tex' } 
 
 Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } }
@@ -203,3 +204,7 @@ noremap <silent> <leader>o :Over<cr>
 
 " For cobol files
 autocmd FileType cobol set sw=4 sts=4 et sta tw=72
+
+" Enable auto reload of files
+set autoread
+au FocusGained,BufEnter * :checktime
