@@ -65,6 +65,9 @@ Plug 'vim-pandoc/vim-pandoc-syntax'
 Plug 'KeitaNakamura/tex-conceal.vim'
 Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
 Plug 'tmux-plugins/vim-tmux-focus-events'
+Plug 'puremourning/vimspector'
+Plug 'szw/vim-maximizer'
+
 "Plug 'sirver/ultisnips', { 'for': 'tex' } 
 
 Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } }
@@ -135,6 +138,38 @@ inoremap <silent><expr> <TAB>
       \ coc#refresh()
 inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 
+"More coc stuff:
+" Use K to show documentation in preview window.
+nnoremap <silent> K :call <SID>show_documentation()<CR>
+
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  elseif (coc#rpc#ready())
+    call CocActionAsync('doHover')
+  else
+    execute '!' . &keywordprg . " " . expand('<cword>')
+  endif
+endfunction
+
+" Highlight the symbol and its references when holding the cursor.
+autocmd CursorHold * silent call CocActionAsync('highlight')
+
+" Symbol renaming.
+nmap <leader>rn <Plug>(coc-rename)
+
+" Formatting selected code.
+xmap <leader>f  <Plug>(coc-format-selected)
+nmap <leader>f  <Plug>(coc-format-selected)
+
+augroup mygroup
+  autocmd!
+  " Setup formatexpr specified filetype(s).
+  autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
+  " Update signature help on jump placeholder.
+  autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
+augroup end
+
 " For terminal
 " Make esc enter normal mode for terminal mode
 tnoremap <Esc> <C-\><C-n>
@@ -178,12 +213,7 @@ let g:vimtex_quickfix_enabled = 0
 set conceallevel=1
 let g:tex_conceal='abdmg'
 hi Conceal ctermbg=none
-"From the following link:
-"https://castel.dev/post/lecture-notes-1/
-"Too slow rn for my laptop
-" let g:UltisnipsExpandTrigger = '<tab>'
-" let g:UltiSnipsJumpForwardTrigger = '<tab>'
-" let g:UltiSnipsJumpBackwardTrigger = '<s-tab>'
+nnoremap \lc :VimtexStop<cr>:VimtexClean<cr>
 
 " Markdown Stuff
 au BufWritePost *.md nmap <leader>p :!pandoc -o %:r.pdf -t beamer % <CR><CR>
@@ -208,3 +238,48 @@ autocmd FileType cobol set sw=4 sts=4 et sta tw=72
 " Enable auto reload of files
 set autoread
 au FocusGained,BufEnter * :checktime
+
+" Firenvim stuff
+let g:firenvim_config = { 
+    \ 'globalSettings': {
+        \ 'alt': 'all',
+    \  },
+    \ 'localSettings': {
+        \ '.*': {
+            \ 'cmdline': 'neovim',
+            \ 'content': 'text',
+            \ 'priority': 0,
+            \ 'selector': 'textarea',
+            \ 'takeover': 'always',
+        \ },
+    \ }
+\ }
+
+" Blacklist for firenvim
+let fc = g:firenvim_config['localSettings']
+let fc['https?://twitch.tv'] = { 'takeover': 'never', 'priority': 1 }
+let fc['https?://google.com'] = { 'takeover': 'never', 'priority': 1 }
+
+" Debugger remaps 
+" Copied from https://github.com/awesome-streamers/awesome-streamerrc/blob/master/ThePrimeagen/init.vim
+nnoremap <leader>m :MaximizerToggle!<CR>
+nnoremap <leader>dd :call vimspector#Launch()<CR>
+nnoremap <leader>dc :call GotoWindow(g:vimspector_session_windows.code)<CR>
+nnoremap <leader>dt :call GotoWindow(g:vimspector_session_windows.tagpage)<CR>
+nnoremap <leader>dv :call GotoWindow(g:vimspector_session_windows.variables)<CR>
+nnoremap <leader>dw :call GotoWindow(g:vimspector_session_windows.watches)<CR>
+nnoremap <leader>ds :call GotoWindow(g:vimspector_session_windows.stack_trace)<CR>
+nnoremap <leader>do :call GotoWindow(g:vimspector_session_windows.output)<CR>
+nnoremap <leader>de :call vimspector#Reset()<CR>
+
+nnoremap <leader>dtcb :call vimspector#CleanLineBreakpoint()<CR>
+
+nmap <leader>dl <Plug>VimspectorStepInto
+nmap <leader>dj <Plug>VimspectorStepOver
+nmap <leader>dk <Plug>VimspectorStepOut
+nmap <leader>d_ <Plug>VimspectorRestart
+nnoremap <leader>d<space> :call vimspector#Continue()<CR>
+
+nmap <leader>drc <Plug>VimspectorRunToCursor
+nmap <leader>dbp <Plug>VimspectorToggleBreakpoint
+nmap <leader>dcbp <Plug>VimspectorToggleConditionalBreakpoint
