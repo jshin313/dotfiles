@@ -1,6 +1,7 @@
 sudo apt-get update
 sudo apt-get upgrade -y
 
+sudo apt-get install curl
 sudo apt-get install stow -y
 stow gdb
 stow git
