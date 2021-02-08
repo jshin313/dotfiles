@@ -140,7 +140,7 @@ inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 
 "More coc stuff:
 " Use K to show documentation in preview window.
-nnoremap <silent> K :call <SID>show_documentation()<CR>
+nnoremap <silent><leader>K :call <SID>show_documentation()<CR>
 
 function! s:show_documentation()
   if (index(['vim','help'], &filetype) >= 0)
@@ -191,6 +191,18 @@ autocmd Filetype tex setl updatetime=1
 
 "Latex stuff
 "https://medium.com/@Pirmin/a-minimal-latex-setup-on-windows-using-wsl2-and-neovim-51259ff94734
+
+let g:vimtex_latexmk_options = '-pdf -shell-escape -verbose -file-line-error -synctex=1 -interaction=nonstopmode'
+let g:vimtex_compiler_latexmk = {
+			\ 'options' : [
+			\   '-pdf',
+			\   '-shell-escape',
+			\   '-verbose',
+			\   '-file-line-error',
+			\   '-synctex=1',
+			\   '-interaction=nonstopmode',
+			\ ],
+			\}
 
 " Detect if in WSL based on https://stackoverflow.com/a/57015339
 let uname = substitute(system('uname'),'\n','','')
@@ -259,6 +271,7 @@ let g:firenvim_config = {
 let fc = g:firenvim_config['localSettings']
 let fc['https?://twitch.tv'] = { 'takeover': 'never', 'priority': 1 }
 let fc['https?://google.com'] = { 'takeover': 'never', 'priority': 1 }
+let fc['https?://discovercard.com'] = { 'takeover': 'never', 'priority': 1 }
 
 " Debugger remaps 
 " Copied from https://github.com/awesome-streamers/awesome-streamerrc/blob/master/ThePrimeagen/init.vim

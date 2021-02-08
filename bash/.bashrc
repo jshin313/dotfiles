@@ -135,3 +135,5 @@ else
     setxkbmap -option 'caps:ctrl_modifier'
 fi
 source "$HOME/.cargo/env"
+export CEDEV=/opt/CEdev
+export PATH=$CEDEV/bin:$PATH
