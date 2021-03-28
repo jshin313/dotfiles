@@ -1,4 +1,4 @@
-" Basically the same as Primeagen's vimrc 
+" Based on the Primeagen's vimrc 
 " https://www.youtube.com/watch?v=n9k9scbTuvQ
 " Will probably change a bit as I become more pro at vim
 
