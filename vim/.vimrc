@@ -1,6 +1,6 @@
 " Somewhat Based on the Primeagen's vimrc 
 " https://www.youtube.com/watch?v=n9k9scbTuvQ
-" Will probably change a bit as I become more pro at vim
+" Will probably change a bit as I become more pro at vim (hopefully) and become less noob
 
 "Note to self: Add the following on a new machine's .profile to map caps lock
 "to control when being used as a modifier
