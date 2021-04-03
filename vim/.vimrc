@@ -48,7 +48,7 @@ call plug#begin('~/.vim/plugged')
 Plug 'morhetz/gruvbox' "Color scheme
 Plug 'jremmen/vim-ripgrep'
 Plug 'tpope/vim-fugitive' "Diffs, logs, git blame
-Plug 'vim-airline/vim-airline' "Tells you what branch you're on and which file
+Plug 'vim-airline/vim-airline' "Tells you what branch you're on and which file; recommended by primeagen in https://youtu.be/PO6DxfGPQvw?
 Plug 'vim-utils/vim-man'
 "Plug 'ycm-core/YouCompleteMe'
 Plug 'neoclide/coc.nvim', {'branch': 'release'} "Another autocomplete
@@ -93,6 +93,7 @@ let g:netrw_browse_split = 2
 let g:netrw_banner = 0
 let g:netrw_winsize = 25
 
+" Space is still better than using ctrl-w on qwerty
 nnoremap <leader>h :wincmd h<CR>
 nnoremap <leader>j :wincmd j<CR>
 nnoremap <leader>k :wincmd k<CR>
@@ -100,8 +101,9 @@ nnoremap <leader>l :wincmd l<CR>
 nnoremap <leader>u :UndotreeShow<CR>
 nnoremap <leader>pv :wincmd v<bar> :Ex <bar> :vertical resize 30<CR>
 nnoremap <Leader>ps :Rg<SPACE>
-nnoremap <silent> <Leader>+ :vertical resize +5<CR>
-nnoremap <silent> <Leader>- :vertical resize -5<CR>
+
+" nnoremap <silent> <Leader>+ :vertical resize +5<CR>
+" nnoremap <silent> <Leader>- :vertical resize -5<CR>
 
 " Allows you to move a highlighted line up or down
 vnoremap J :m '>+1<CR>gv=gv 
@@ -122,12 +124,8 @@ nmap <silent><leader>gy <Plug>(coc-type-definition)
 nmap <silent><leader>gi <Plug>(coc-implementation)
 nmap <silent><leader>gr <Plug>(coc-references)
 
-
-" use <tab> for trigger completion and navigate to the next complete item
-function! s:check_back_space() abort
-    let col = col('.') - 1
-    return !col || getline('.')[col - 1]  =~ '\s'
-endfunction
+"
+" COC STUFF
 
 " Use tab for trigger completion with characters ahead and navigate.
 " NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
@@ -137,6 +135,11 @@ inoremap <silent><expr> <TAB>
       \ <SID>check_back_space() ? "\<TAB>" :
       \ coc#refresh()
 inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
 
 "More coc stuff:
 " Use K to show documentation in preview window.
@@ -152,8 +155,8 @@ function! s:show_documentation()
   endif
 endfunction
 
-" Highlight the symbol and its references when holding the cursor.
-autocmd CursorHold * silent call CocActionAsync('highlight')
+" " Highlight the symbol and its references when holding the cursor.
+" autocmd CursorHold * silent call CocActionAsync('highlight')
 
 " Symbol renaming.
 nmap <leader>rn <Plug>(coc-rename)
@@ -169,6 +172,12 @@ augroup mygroup
   " Update signature help on jump placeholder.
   autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
 augroup end
+
+" auto install these plugins for coc
+let g:coc_global_extensions = [
+	\ 'coc-java',
+	\ 'coc-java-debug',
+	\]
 
 " For terminal
 " Make esc enter normal mode for terminal mode
@@ -227,8 +236,10 @@ let g:tex_conceal='abdmg'
 hi Conceal ctermbg=none
 nnoremap \lc :VimtexStop<cr>:VimtexClean<cr>
 
-" Markdown Stuff
-au BufWritePost *.md nmap <leader>p :!pandoc -o %:r.pdf -t beamer % <CR><CR>
+" MARKDOWN STUFF
+" For beamer presentations
+au BufWritePost *.md nmap <leader>b :!pandoc -o %:r.pdf -t beamer % <CR><CR>
+" For regular markdown files
 nmap <C-s> <Plug>MarkdownPreview
 
 " Get rid of arrow keys
@@ -237,12 +248,12 @@ noremap <Down> <nop>
 noremap <Left> <nop>
 noremap <Right> <nop>
 
-" For vim debugging
+" For vim debugging (not vimspector)
 let g:termdebug_wide=1
 packadd termdebug
 " Add mappings for :Step and :Over
 noremap <silent> <leader>s :Step<cr>
-noremap <silent> <leader>o :Over<cr>
+" noremap <silent> <leader>o :Over<cr>
 
 " For cobol files
 autocmd FileType cobol set sw=4 sts=4 et sta tw=72
@@ -251,7 +262,7 @@ autocmd FileType cobol set sw=4 sts=4 et sta tw=72
 set autoread
 au FocusGained,BufEnter * :checktime
 
-" Firenvim stuff
+" FIRENVIM STUFF
 let g:firenvim_config = { 
     \ 'globalSettings': {
         \ 'alt': 'all',
@@ -272,11 +283,16 @@ let fc = g:firenvim_config['localSettings']
 let fc['https?://twitch.tv'] = { 'takeover': 'never', 'priority': 1 }
 let fc['https?://google.com'] = { 'takeover': 'never', 'priority': 1 }
 let fc['https?://discovercard.com'] = { 'takeover': 'never', 'priority': 1 }
+let fc['https?://discover.com'] = { 'takeover': 'never', 'priority': 1 }
+let fc['https?://.*.?ifttt.com'] = { 'takeover': 'never', 'priority': 1 }
+let fc['https?://webassign.net'] = { 'takeover': 'never', 'priority': 1 }
 
-" Debugger remaps 
+" DEBUGGER REMAPS FOR VIMSPECTOR
+" Note to self: Make sure to install coc-java and coc-java-debug when debugging java
 " Copied from https://github.com/awesome-streamers/awesome-streamerrc/blob/master/ThePrimeagen/init.vim
 nnoremap <leader>m :MaximizerToggle!<CR>
-nnoremap <leader>dd :call vimspector#Launch()<CR>
+autocmd FileType java nnoremap <leader>dd :CocCommand java.debug.vimspector.start<CR>
+autocmd FileType c, javascript nnoremap <leader>dd :call vimspector#Launch()<CR>
 nnoremap <leader>dc :call GotoWindow(g:vimspector_session_windows.code)<CR>
 nnoremap <leader>dt :call GotoWindow(g:vimspector_session_windows.tagpage)<CR>
 nnoremap <leader>dv :call GotoWindow(g:vimspector_session_windows.variables)<CR>
@@ -296,3 +312,11 @@ nnoremap <leader>d<space> :call vimspector#Continue()<CR>
 nmap <leader>drc <Plug>VimspectorRunToCursor
 nmap <leader>dbp <Plug>VimspectorToggleBreakpoint
 nmap <leader>dcbp <Plug>VimspectorToggleConditionalBreakpoint
+
+"
+" CUSTOM REMAPS
+"
+" https://vi.stackexchange.com/a/3877
+" "_ selects the 'blackhole' buffer and D deletes as expected
+nnoremap <Leader>o o<Esc>0"_D
+nnoremap <Leader>O O<Esc>0"_D
