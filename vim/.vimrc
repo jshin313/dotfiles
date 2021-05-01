@@ -42,6 +42,8 @@ set cmdheight=2 "Better display messages
 " " delays and poor user experience.
 set updatetime=300
 
+set rtp+=~/school
+
 "Plug, the plugin manager
 call plug#begin('~/.vim/plugged')
 
@@ -58,18 +60,19 @@ Plug 'tpope/vim-commentary', "Comments!
 Plug 'terryma/vim-multiple-cursors' "Multiple Cursors
 Plug 'sheerun/vim-polyglot' "Support for a bunch of Languages
 Plug 'psliwka/vim-smoothie' "Smooth scrolling
-Plug 'lervag/vimtex'
+Plug 'lervag/vimtex', {'tag': 'v1.6'} "1.6 to maintain compatbility with tex-conceal since they vimtex decided to break compatbility by adding their own conceal support (largely inferior)
 Plug 'vim-pandoc/vim-pandoc' "doesn't work for some reason with markdown
 " preview
 Plug 'vim-pandoc/vim-pandoc-syntax' 
-Plug 'KeitaNakamura/tex-conceal.vim'
+" Plug 'KeitaNakamura/tex-conceal.vim'
 Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
 Plug 'tmux-plugins/vim-tmux-focus-events'
 Plug 'puremourning/vimspector'
 Plug 'szw/vim-maximizer'
 
 " Magic. Mainly for faster latex typing
-Plug 'sirver/ultisnips', { 'for': 'tex' } 
+Plug 'SirVer/ultisnips', { 'for': ['tex', 'markdown'] } 
+" Plug 'honza/vim-snippets'
 
 Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } }
 
@@ -237,12 +240,25 @@ nnoremap \lc :VimtexStop<cr>:VimtexClean<cr>
 " Magic latex https://castel.dev/post/lecture-notes-1/
 let g:tex_flavor='latex'
 let g:vimtex_quickfix_mode=0
+
+" Conceal
 set conceallevel=1
+let g:tex_conceal_frac=1 "TODO: get this actually working
 let g:tex_conceal='abdmg'
+hi Conceal ctermbg=none
+let g:tex_superscripts= "[0-9a-zA-W.,:;+-<>/()=]"
+let g:tex_subscripts= "[0-9aehijklmnoprstuvx,+-/().]"
 
 let g:UltiSnipsExpandTrigger = '<tab>'
 let g:UltiSnipsJumpForwardTrigger = '<tab>'
 let g:UltiSnipsJumpBackwardTrigger = '<s-tab>'
+
+" autocorrect
+setlocal spell
+set spelllang=en_us
+" Jump to last spelling error and correct and then jump back to original
+" position
+inoremap <C-l> <c-g>u<Esc>[s1z=`]a<c-g>u
 
 """""""""""""""""
 " MARKDOWN STUFF
