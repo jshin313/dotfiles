@@ -74,6 +74,9 @@ Plug 'szw/vim-maximizer'
 Plug 'SirVer/ultisnips', { 'for': ['tex', 'markdown'] } 
 " Plug 'honza/vim-snippets'
 
+" Live preview for latex
+Plug 'xuhdev/vim-latex-live-preview', { 'for': 'tex' }
+
 Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } }
 
 Plug 'ThePrimeagen/vim-be-good', {'do': './install.sh'} "Game for vim
@@ -233,6 +236,7 @@ else
     let g:vimtex_view_general_viewer = 'zathura'
     let g:vimtex_view_general_options = ''
     let g:vimtex_view_general_options_latexmk = ''
+    " let g:livepreview_previewer = 'zathura'
 endif
 
 nnoremap \lc :VimtexStop<cr>:VimtexClean<cr>
