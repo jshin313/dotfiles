@@ -65,13 +65,13 @@ Plug 'vim-pandoc/vim-pandoc' "doesn't work for some reason with markdown
 " preview
 Plug 'vim-pandoc/vim-pandoc-syntax' 
 " Plug 'KeitaNakamura/tex-conceal.vim'
-Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
+Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['pandoc', 'markdown', 'vim-plug']}
 Plug 'tmux-plugins/vim-tmux-focus-events'
 Plug 'puremourning/vimspector'
 Plug 'szw/vim-maximizer'
 
 " Magic. Mainly for faster latex typing
-Plug 'SirVer/ultisnips', { 'for': ['tex', 'markdown'] } 
+Plug 'SirVer/ultisnips', { 'for': ['tex', 'markdown', 'pandoc'] } 
 " Plug 'honza/vim-snippets'
 
 " Live preview for latex
@@ -264,17 +264,37 @@ set spelllang=en_us
 " position
 inoremap <C-l> <c-g>u<Esc>[s1z=`]a<c-g>u
 
+" https://ericchapdelaine.com/articles/how-i-take-notes
+nnoremap <C-f> :exec '.!~/.vim/scripts/ink.py %:r "'.getline(".").'"'
+
+" https://github.com/gillescastel/inkscape-figures
+autocmd Filetype tex,latex inoremap <C-f> <Esc>: silent exec '.!inkscape-figures create "'.getline('.').'" "'.b:vimtex.root.'/figures/"'<CR><CR>:w<CR>
+autocmd Filetype tex,latex nnoremap <C-f> : silent exec '!inkscape-figures edit "'.b:vimtex.root.'/figures/" > /dev/null 2>&1 &'<CR><CR>:redraw!<CR>
+
 """""""""""""""""
 " MARKDOWN STUFF
 """""""""""""""""
 
-" For beamer presentations
-au BufWritePost *.md nmap <leader>b :!pandoc -o %:r.pdf -t beamer % <CR><CR>
+" Markdown Preview Stuff
 " For regular markdown files
 let g:mkdp_command_for_global = 1
 let g:mkdp_echo_preview_url = 1
 let g:mkdp_open_to_the_world = 1
+let g:mkdp_preview_options = {
+            \ 'katex': {
+            \ 	'macros': {
+            \ 		"\\vb": "\\overrightarrow",
+            \ 		"\\ev": "\\mathbf",
+            \ 		"\\cross": "\\times"
+            \ 	}
+            \ },
+            \ }
+
 map <C-s> <Plug>MarkdownPreview
+
+
+" For beamer presentations
+au BufWritePost *.md nmap <leader>b :!pandoc -o %:r.pdf -t beamer % <CR><CR>
 
 " Get rid of arrow keys
 noremap <Up> <nop>
