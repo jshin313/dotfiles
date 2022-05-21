@@ -77,8 +77,6 @@ Plug 'SirVer/ultisnips', { 'for': ['tex', 'markdown', 'pandoc'] }
 " Live preview for latex
 Plug 'xuhdev/vim-latex-live-preview', { 'for': 'tex' }
 
-Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } }
-
 Plug 'ThePrimeagen/vim-be-good', {'do': './install.sh'} "Game for vim
 
 Plug 'chrisbra/csv.vim'
@@ -315,31 +313,6 @@ autocmd FileType cobol set sw=4 sts=4 et sta tw=72
 " Enable auto reload of files
 set autoread
 au FocusGained,BufEnter * :checktime
-
-" FIRENVIM STUFF
-let g:firenvim_config = { 
-    \ 'globalSettings': {
-        \ 'alt': 'all',
-    \  },
-    \ 'localSettings': {
-        \ '.*': {
-            \ 'cmdline': 'neovim',
-            \ 'content': 'text',
-            \ 'priority': 0,
-            \ 'selector': 'textarea',
-            \ 'takeover': 'always',
-        \ },
-    \ }
-\ }
-
-" Blacklist for firenvim
-let fc = g:firenvim_config['localSettings']
-let fc['https?://twitch.tv'] = { 'takeover': 'never', 'priority': 1 }
-let fc['https?://google.com'] = { 'takeover': 'never', 'priority': 1 }
-let fc['https?://discovercard.com'] = { 'takeover': 'never', 'priority': 1 }
-let fc['https?://discover.com'] = { 'takeover': 'never', 'priority': 1 }
-let fc['https?://.*.?ifttt.com'] = { 'takeover': 'never', 'priority': 1 }
-let fc['https?://webassign.net'] = { 'takeover': 'never', 'priority': 1 }
 
 " DEBUGGER REMAPS FOR VIMSPECTOR
 " Note to self: Make sure to install coc-java and coc-java-debug when debugging java
