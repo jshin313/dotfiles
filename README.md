@@ -3,7 +3,7 @@
 ## Installation
 ```console
 $ sudo apt install git -y
-$ git clone --recurse-submodules -j8 https://github.com/jshin313/dotfiles ~/.dotfiles
+$ git clone https://github.com/jshin313/dotfiles ~/.dotfiles
 $ cd .dotfiles
 $ ./install.sh
 ```
@@ -15,3 +15,7 @@ Check out [The Primeagen](https://www.youtube.com/channel/UC8ENHE5xdFSwx71u3fDH5
 `:PlugUpdate`: Update Plugins
 `:PlugClean`: Remove unneeded plugins
 `:PlugInstall`: Add plugins
+
+## Tmux Plugins
+`<Prefix>I`: Install tmux plugins
+`<Prefix>u`: Update tmux plugins
