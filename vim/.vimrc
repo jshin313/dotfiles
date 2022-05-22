@@ -42,8 +42,6 @@ set cmdheight=2 "Better display messages
 " " delays and poor user experience.
 set updatetime=300
 
-set rtp+=~/school
-
 "Plug, the plugin manager
 call plug#begin('~/.vim/plugged')
 
@@ -51,8 +49,6 @@ Plug 'morhetz/gruvbox' "Color scheme
 Plug 'jremmen/vim-ripgrep'
 Plug 'tpope/vim-fugitive' "Diffs, logs, git blame
 Plug 'vim-airline/vim-airline' "Tells you what branch you're on and which file; recommended by primeagen in https://youtu.be/PO6DxfGPQvw?
-"Plug 'ycm-core/YouCompleteMe'
-Plug 'neoclide/coc.nvim', {'branch': 'release'} "Another autocomplete
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim' "File finding
 Plug 'mbbill/undotree'
@@ -66,7 +62,6 @@ Plug 'vim-pandoc/vim-pandoc' "doesn't work for some reason with markdown
 Plug 'vim-pandoc/vim-pandoc-syntax' 
 " Plug 'KeitaNakamura/tex-conceal.vim'
 Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['pandoc', 'markdown', 'vim-plug']}
-Plug 'tmux-plugins/vim-tmux-focus-events'
 Plug 'puremourning/vimspector'
 Plug 'szw/vim-maximizer'
 
@@ -117,83 +112,8 @@ vnoremap K :m '<-2<CR>gv=gv
 " Fzf File Finding
 nnoremap <C-p> :GFiles<CR> 
 
-""" Autocomplete Remaps
-"nnoremap <silent> <Leader>gd :YcmCompleter GoTo<CR>
-"nnoremap <silent> <Leader>gr :YcmCompleter GoToReferences<CR>
-
-" GoTo code navigation
-" Make sure to download clangd for c
-" and coc-pyright for python
-nmap <silent><leader>gd <Plug>(coc-definition)
-nmap <silent><leader>gy <Plug>(coc-type-definition)
-nmap <silent><leader>gi <Plug>(coc-implementation)
-nmap <silent><leader>gr <Plug>(coc-references)
-
 "
 " COC STUFF
-
-" Use tab for trigger completion with characters ahead and navigate.
-" NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
-" other plugin before putting this into your config.
-inoremap <silent><expr> <TAB>
-      \ pumvisible() ? "\<C-n>" :
-      \ <SID>check_back_space() ? "\<TAB>" :
-      \ coc#refresh()
-inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
-
-function! s:check_back_space() abort
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~# '\s'
-endfunction
-
-"More coc stuff:
-" Use K to show documentation in preview window.
-nnoremap <silent><leader>K :call <SID>show_documentation()<CR>
-
-function! s:show_documentation()
-  if (index(['vim','help'], &filetype) >= 0)
-    execute 'h '.expand('<cword>')
-  elseif (coc#rpc#ready())
-    call CocActionAsync('doHover')
-  else
-    execute '!' . &keywordprg . " " . expand('<cword>')
-  endif
-endfunction
-
-" " Highlight the symbol and its references when holding the cursor.
-" autocmd CursorHold * silent call CocActionAsync('highlight')
-
-" Symbol renaming.
-nmap <leader>rn <Plug>(coc-rename)
-
-" Formatting selected code.
-xmap <leader>f  <Plug>(coc-format-selected)
-nmap <leader>f  <Plug>(coc-format-selected)
-
-augroup mygroup
-  autocmd!
-  " Setup formatexpr specified filetype(s).
-  autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
-  " Update signature help on jump placeholder.
-  autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
-augroup end
-
-" auto install these plugins for coc
-let g:coc_global_extensions = [
-	\ 'coc-java',
-	\ 'coc-java-debug',
-    \ 'coc-pyright',
-	\]
-
-" For terminal
-" Make esc enter normal mode for terminal mode
-tnoremap <Esc> <C-\><C-n>
-
-if has('nvim')
-    "When in terminal mode remove line numbers
-    au TermOpen * setlocal listchars= nonumber norelativenumber
-    au TermOpen * startinsert
-endif
 
 """""""""""""""
 " GIT FUGITIVE
@@ -205,55 +125,12 @@ nmap <leader>gs :G<CR>
 """""""""
 " LATEX
 """""""""
-filetype plugin on
-" autocmd Filetype tex setl updatetime=1
 
-"https://medium.com/@Pirmin/a-minimal-latex-setup-on-windows-using-wsl2-and-neovim-51259ff94734
-" let g:vimtex_latexmk_options = '-pdf -shell-escape -verbose -file-line-error -synctex=1 -interaction=nonstopmode'
-" let g:vimtex_compiler_latexmk = {
-" 			\ 'options' : [
-" 			\   '-pdf',
-" 			\   '-shell-escape',
-" 			\   '-verbose',
-" 			\   '-file-line-error',
-" 			\   '-synctex=1',
-" 			\   '-interaction=nonstopmode',
-" 			\ ],
-" 			\}
-
-" Detect if in WSL based on https://stackoverflow.com/a/57015339
-let uname = substitute(system('uname'),'\n','','')
-if uname == 'Linux'
-    let lines = readfile("/proc/version")
-    if lines[0] =~ "Microsoft"
-        let g:vimtex_view_general_viewer = 'sumatraPDF'
-        let g:vimtex_view_general_options = '-reuse-instance @pdf'
-        let g:vimtex_view_general_options_latexmk = '-reuse-instance'
-    endif
-else
-    let g:vimtex_view_general_viewer = 'zathura'
-    let g:vimtex_view_general_options = ''
-    let g:vimtex_view_general_options_latexmk = ''
-    " let g:livepreview_previewer = 'zathura'
-endif
-
-nnoremap \lc :VimtexStop<cr>:VimtexClean<cr>
-
-" Magic latex https://castel.dev/post/lecture-notes-1/
 let g:tex_flavor='latex'
 let g:vimtex_quickfix_mode=0
 
-" Conceal
-set conceallevel=1
-let g:tex_conceal_frac=1 "TODO: get this actually working
-let g:tex_conceal='abdmg'
-hi Conceal ctermbg=none
-let g:tex_superscripts= "[0-9a-zA-W.,:;+-<>/()=]"
-let g:tex_subscripts= "[0-9aehijklmnoprstuvx,+-/().]"
-
-let g:UltiSnipsExpandTrigger = '<tab>'
-let g:UltiSnipsJumpForwardTrigger = '<tab>'
-let g:UltiSnipsJumpBackwardTrigger = '<s-tab>'
+filetype plugin on
+" autocmd Filetype tex setl updatetime=1
 
 " autocorrect
 setlocal spell
@@ -261,13 +138,6 @@ set spelllang=en_us
 " Jump to last spelling error and correct and then jump back to original
 " position
 inoremap <C-l> <c-g>u<Esc>[s1z=`]a<c-g>u
-
-" https://ericchapdelaine.com/articles/how-i-take-notes
-nnoremap <C-f> :exec '.!~/.vim/scripts/ink.py %:r "'.getline(".").'"'
-
-" https://github.com/gillescastel/inkscape-figures
-autocmd Filetype tex,latex inoremap <C-f> <Esc>: silent exec '.!inkscape-figures create "'.getline('.').'" "'.b:vimtex.root.'/figures/"'<CR><CR>:w<CR>
-autocmd Filetype tex,latex nnoremap <C-f> : silent exec '!inkscape-figures edit "'.b:vimtex.root.'/figures/" > /dev/null 2>&1 &'<CR><CR>:redraw!<CR>
 
 """""""""""""""""
 " MARKDOWN STUFF
@@ -307,9 +177,6 @@ packadd termdebug
 noremap <silent> <leader>s :Step<cr>
 " noremap <silent> <leader>o :Over<cr>
 
-" For cobol files
-autocmd FileType cobol set sw=4 sts=4 et sta tw=72
-
 " Enable auto reload of files
 set autoread
 au FocusGained,BufEnter * :checktime
@@ -317,28 +184,6 @@ au FocusGained,BufEnter * :checktime
 " DEBUGGER REMAPS FOR VIMSPECTOR
 " Note to self: Make sure to install coc-java and coc-java-debug when debugging java
 " Copied from https://github.com/awesome-streamers/awesome-streamerrc/blob/master/ThePrimeagen/init.vim
-nnoremap <leader>m :MaximizerToggle!<CR>
-autocmd FileType java nnoremap <leader>dd :CocCommand java.debug.vimspector.start<CR>
-autocmd FileType c,javascript nnoremap <leader>dd :call vimspector#Launch()<CR>
-nnoremap <leader>dc :call GotoWindow(g:vimspector_session_windows.code)<CR>
-nnoremap <leader>dt :call GotoWindow(g:vimspector_session_windows.tagpage)<CR>
-nnoremap <leader>dv :call GotoWindow(g:vimspector_session_windows.variables)<CR>
-nnoremap <leader>dw :call GotoWindow(g:vimspector_session_windows.watches)<CR>
-nnoremap <leader>ds :call GotoWindow(g:vimspector_session_windows.stack_trace)<CR>
-nnoremap <leader>do :call GotoWindow(g:vimspector_session_windows.output)<CR>
-nnoremap <leader>de :call vimspector#Reset()<CR>
-
-nnoremap <leader>dtcb :call vimspector#CleanLineBreakpoint()<CR>
-
-nmap <leader>dj <Plug>VimspectorStepOver
-nmap <leader>dk <Plug>VimspectorStepOut
-nmap <leader>dl <Plug>VimspectorStepInto
-nmap <leader>d_ <Plug>VimspectorRestart
-nnoremap <leader>d<space> :call vimspector#Continue()<CR>
-
-nmap <leader>drc <Plug>VimspectorRunToCursor
-nmap <leader>dbp <Plug>VimspectorToggleBreakpoint
-nmap <leader>dcbp <Plug>VimspectorToggleConditionalBreakpoint
 
 "
 " CUSTOM REMAPS
