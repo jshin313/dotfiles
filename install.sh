@@ -1,6 +1,6 @@
 sudo apt-get update
 sudo apt-get upgrade -y
-sudo add-apt-repository ppa:neovim-ppa/stable
+# sudo add-apt-repository ppa:neovim-ppa/stable
 sudo apt update
 
 sudo apt-get install curl
@@ -15,13 +15,13 @@ sudo apt-get install yarn -y
 sudo apt-get install ripgrep -y
 sudo apt-get install elfutils -y
 sudo apt-get install python3-pip -y
+sudo apt-get install zsh -y
 sudo npm install -g neovim
 
 stow gdb
 stow tmux
 stow vim
 stow latexmk
-
 
 # Set up vim directories
 mkdir -p ~/.vim/undodir
@@ -30,13 +30,9 @@ mkdir -p ~/.vim/backupdir
 # Install Vim-Plug
 curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
-
 # Make nvim's config the same as regular vim
 mkdir -p ~/.config/nvim/
-echo -e "set runtimepath^=~/.vim runtimepath+=~/.vim/after \n \
-     let &packpath = &runtimepath \n \
-     source ~/.vimrc" > ~/.config/nvim/init.vim
-
+echo "set runtimepath^=~/.vim runtimepath+=~/.vim/after \nlet &packpath = &runtimepath \nsource ~/.vimrc" > ~/.config/nvim/init.vim
 
 nvim +PlugInstall +qall
 nvim +UpdateRemotePlugins +qall
@@ -56,3 +52,8 @@ git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 mkdir -p ~/.local/lib/github-markdown-css/
 curl -fLo ~/.local/lib/github-markdown-css/github-markdown.css --create-dirs https://raw.githubusercontent.com/sindresorhus/github-markdown-css/gh-pages/github-markdown.css
 
+# GDB
+## Pwndbg
+git clone https://github.com/pwndbg/pwndbg ~/.pwndbg
+cd pwndbg
+./setup.sh

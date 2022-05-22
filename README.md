@@ -22,3 +22,18 @@ Check out [The Primeagen](https://www.youtube.com/channel/UC8ENHE5xdFSwx71u3fDH5
 
 ## Terminal Colorscheme
 https://github.com/Gogh-Co/Gogh
+
+## Zsh
+```console
+$ sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+```
+Run the above to install Oh My Zsh
+
+Then make sure to update the following in `~/.zshrc` for vim support
+```
+plugins=(
+	vi-mode
+	git
+)
+```
+
