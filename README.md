@@ -18,4 +18,7 @@ Check out [The Primeagen](https://www.youtube.com/channel/UC8ENHE5xdFSwx71u3fDH5
 
 ## Tmux Plugins
 `<Prefix>I`: Install tmux plugins
-`<Prefix>u`: Update tmux plugins
+`<Prefix>U`: Update tmux plugins
+
+## Terminal Colorscheme
+https://github.com/Gogh-Co/Gogh
