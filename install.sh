@@ -32,7 +32,7 @@ curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.c
 
 # Make nvim's config the same as regular vim
 mkdir -p ~/.config/nvim/
-echo "set runtimepath^=~/.vim runtimepath+=~/.vim/after \nlet &packpath = &runtimepath \nsource ~/.vimrc" > ~/.config/nvim/init.vim
+printf "set runtimepath^=~/.vim runtimepath+=~/.vim/after \nlet &packpath = &runtimepath \nsource ~/.vimrc\n" > ~/.config/nvim/init.vim
 
 nvim +PlugInstall +qall
 nvim +UpdateRemotePlugins +qall
@@ -55,5 +55,6 @@ curl -fLo ~/.local/lib/github-markdown-css/github-markdown.css --create-dirs htt
 # GDB
 ## Pwndbg
 git clone https://github.com/pwndbg/pwndbg ~/.pwndbg
-cd pwndbg
+cd ~/.pwndbg
+chmod +x setup.sh
 ./setup.sh
