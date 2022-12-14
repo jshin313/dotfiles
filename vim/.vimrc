@@ -56,21 +56,11 @@ Plug 'tpope/vim-commentary', "Comments!
 Plug 'terryma/vim-multiple-cursors' "Multiple Cursors
 Plug 'sheerun/vim-polyglot' "Support for a bunch of Languages
 Plug 'psliwka/vim-smoothie' "Smooth scrolling
-Plug 'lervag/vimtex', {'tag': 'v1.6'} "1.6 to maintain compatbility with tex-conceal since they vimtex decided to break compatbility by adding their own conceal support (largely inferior)
-Plug 'vim-pandoc/vim-pandoc' "doesn't work for some reason with markdown
-" preview
-Plug 'vim-pandoc/vim-pandoc-syntax' 
-" Plug 'KeitaNakamura/tex-conceal.vim'
-Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['pandoc', 'markdown', 'vim-plug']}
 Plug 'puremourning/vimspector'
 Plug 'szw/vim-maximizer'
 
 " Magic. Mainly for faster latex typing
 Plug 'SirVer/ultisnips', { 'for': ['tex', 'markdown', 'pandoc'] } 
-" Plug 'honza/vim-snippets'
-
-" Live preview for latex
-Plug 'xuhdev/vim-latex-live-preview', { 'for': 'tex' }
 
 Plug 'ThePrimeagen/vim-be-good', {'do': './install.sh'} "Game for vim
 
@@ -121,48 +111,6 @@ nnoremap <C-p> :GFiles<CR>
 nmap <leader>gj :diffget //3<CR>
 nmap <leader>gf :diffget //2<CR>
 nmap <leader>gs :G<CR>
-
-"""""""""
-" LATEX
-"""""""""
-
-let g:tex_flavor='latex'
-let g:vimtex_quickfix_mode=0
-
-filetype plugin on
-" autocmd Filetype tex setl updatetime=1
-
-" autocorrect
-setlocal spell
-set spelllang=en_us
-" Jump to last spelling error and correct and then jump back to original
-" position
-inoremap <C-l> <c-g>u<Esc>[s1z=`]a<c-g>u
-
-"""""""""""""""""
-" MARKDOWN STUFF
-"""""""""""""""""
-
-" Markdown Preview Stuff
-" For regular markdown files
-let g:mkdp_command_for_global = 1
-let g:mkdp_echo_preview_url = 1
-let g:mkdp_open_to_the_world = 1
-let g:mkdp_preview_options = {
-            \ 'katex': {
-            \ 	'macros': {
-            \ 		"\\vb": "\\overrightarrow",
-            \ 		"\\ev": "\\mathbf",
-            \ 		"\\cross": "\\times"
-            \ 	}
-            \ },
-            \ }
-
-map <C-s> <Plug>MarkdownPreview
-
-
-" For beamer presentations
-au BufWritePost *.md nmap <leader>b :!pandoc -o %:r.pdf -t beamer % <CR><CR>
 
 " Get rid of arrow keys
 noremap <Up> <nop>
