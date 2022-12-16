@@ -37,3 +37,9 @@ plugins=(
 )
 ```
 
+## Windows
+* Use this guide to install i3: https://misterderpie.com/posts/ubuntu-wsl2-i3/
+* To set gruvbox
+	* Run the xfce terminal command found in `install.sh`
+	* Install the gtk gruvbox colors also found in `install.sh`
+

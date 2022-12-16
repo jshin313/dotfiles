@@ -58,3 +58,16 @@ git clone https://github.com/pwndbg/pwndbg ~/.pwndbg
 cd ~/.pwndbg
 chmod +x setup.sh
 ./setup.sh
+
+# Uncomment below for xfce4 Terminal
+# git clone https://github.com/morhetz/gruvbox-contrib
+# mkdir -p ~/.local/share/xfce4/terminal/colorschemes
+# cp gruvbox-contrib/xfce4-terminal/*.theme ~/.local/share/xfce4/terminal/colorschemes/
+# rm -rf gruvbox-contrib
+# git clone https://github.com/TheGreatMcPain/gruvbox-material-gtk
+# sudo apt install gtk2-engines-murrine
+# mkdir -p ~/.local/share/themes/
+# mkdir -p ~/.local/share/icons/
+# mv gruvbox-material-gtk/themes/* ~/.local/share/themes/
+# mv gruvbox-material-gtk/icons/* ~/.local/share/icons/
+# rm -rf gruvbox-material-gtk
