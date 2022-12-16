@@ -59,12 +59,13 @@ Plug 'psliwka/vim-smoothie' "Smooth scrolling
 Plug 'puremourning/vimspector'
 Plug 'szw/vim-maximizer'
 
-" Magic. Mainly for faster latex typing
-Plug 'SirVer/ultisnips', { 'for': ['tex', 'markdown', 'pandoc'] } 
-
 Plug 'ThePrimeagen/vim-be-good', {'do': './install.sh'} "Game for vim
 
 Plug 'chrisbra/csv.vim'
+
+" Magic. Mainly for faster latex typing
+Plug 'SirVer/ultisnips', { 'for': ['tex', 'markdown', 'pandoc'] } 
+Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
 
 call plug#end()
 
@@ -149,3 +150,20 @@ if executable(s:clip)
         autocmd TextYankPost * if v:event.operator ==# 'y' | call system(s:clip, @0) | endif
     augroup END
 endif
+
+"""""""""""""""""
+" MARKDOWN STUFF
+"""""""""""""""""
+
+" Markdown Preview Stuff
+" For regular markdown files
+map <C-s> <Plug>MarkdownPreview
+let g:mkdp_preview_options = {
+            \ 'katex': {
+                \ 	'macros': {
+                    \ 		"\\vb": "\\overrightarrow",
+                    \ 		"\\ev": "\\mathbf",
+                    \ 		"\\cross": "\\times"
+                    \ 	}
+                    \ },
+                    \ }
