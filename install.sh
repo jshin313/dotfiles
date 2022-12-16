@@ -17,6 +17,7 @@ sudo apt-get install elfutils -y
 sudo apt-get install python3-pip -y
 sudo apt-get install zsh -y
 sudo npm install -g neovim
+sudo apt install i3 -y
 
 stow gdb
 stow tmux
@@ -59,15 +60,27 @@ cd ~/.pwndbg
 chmod +x setup.sh
 ./setup.sh
 
-# Uncomment below for xfce4 Terminal
-# git clone https://github.com/morhetz/gruvbox-contrib
-# mkdir -p ~/.local/share/xfce4/terminal/colorschemes
-# cp gruvbox-contrib/xfce4-terminal/*.theme ~/.local/share/xfce4/terminal/colorschemes/
-# rm -rf gruvbox-contrib
-# git clone https://github.com/TheGreatMcPain/gruvbox-material-gtk
-# sudo apt install gtk2-engines-murrine
-# mkdir -p ~/.local/share/themes/
-# mkdir -p ~/.local/share/icons/
-# mv gruvbox-material-gtk/themes/* ~/.local/share/themes/
-# mv gruvbox-material-gtk/icons/* ~/.local/share/icons/
-# rm -rf gruvbox-material-gtk
+# Below for xfce4 Terminal
+sudo apt install gtk2-engines-murrine
+git clone https://github.com/morhetz/gruvbox-contrib
+mkdir -p ~/.local/share/xfce4/terminal/colorschemes
+cp gruvbox-contrib/xfce4-terminal/*.theme ~/.local/share/xfce4/terminal/colorschemes/
+rm -rf gruvbox-contrib
+git clone https://github.com/TheGreatMcPain/gruvbox-material-gtk
+mkdir -p ~/.local/share/themes/
+mkdir -p ~/.local/share/icons/
+mv gruvbox-material-gtk/themes/* ~/.local/share/themes/
+mv gruvbox-material-gtk/icons/* ~/.local/share/icons/
+rm -rf gruvbox-material-gtk
+
+# For WSL only (i3)
+# echo "exec i3" > ~/.xinitrc 
+# echo "export DISPLAY=\$(ipconfig.exe | awk '/IPv4/ {sub(\"\\\r\",\":0\"); print \$NF;exit}')" >> ~/.zshrc
+# echo "export PULSE_SERVER=\$(ipconfig.exe | awk '/IPv4/ {sub(\"\\\r\",\":0\"); print \$NF;exit}')" >> ~/.zshrc
+# echo "export LIBGL_ALWAYS_INDIRECT=1" >> ~/.zshrc
+
+# LaTeX
+git clone https://github.com/gillescastel/latex-snippets
+mkdir -p ~/.vim/UtilSnips
+cp latex-snippets/tex.snippets ~/.vim/UtilSnips
+rm -rf latex-snippets
