@@ -43,3 +43,9 @@ plugins=(
 	* Run the xfce terminal command found in `install.sh`
 	* Install the gtk gruvbox colors also found in `install.sh`
 
+## LaTeX
+* I like to comment out these UtilSnips since they get in the way for me
+	* Figures
+	* Tables
+
+
