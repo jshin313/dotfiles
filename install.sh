@@ -81,6 +81,6 @@ rm -rf gruvbox-material-gtk
 
 # LaTeX
 git clone https://github.com/gillescastel/latex-snippets
-mkdir -p ~/.vim/UtilSnips
-cp latex-snippets/tex.snippets ~/.vim/UtilSnips
+mkdir -p ~/.vim/UltiSnips
+cp latex-snippets/tex.snippets ~/.vim/UltiSnips
 rm -rf latex-snippets

@@ -64,8 +64,9 @@ Plug 'ThePrimeagen/vim-be-good', {'do': './install.sh'} "Game for vim
 Plug 'chrisbra/csv.vim'
 
 " Magic. Mainly for faster latex typing
-Plug 'SirVer/ultisnips', { 'for': ['tex', 'markdown', 'pandoc'] } 
+Plug 'SirVer/ultisnips'
 Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
+Plug 'lervag/vimtex'
 
 call plug#end()
 
@@ -167,3 +168,21 @@ let g:mkdp_preview_options = {
                     \ 	}
                     \ },
                     \ }
+
+"""""""""""""""""
+" LATEX
+"""""""""""""""""
+let g:tex_flavor='latex'
+let g:vimtex_view_method='zathura'
+let g:vimtex_quickfix_mode=0
+set conceallevel=1
+let g:tex_conceal='abdmg'
+
+let g:UltiSnipsExpandTrigger = '<tab>'
+let g:UltiSnipsJumpForwardTrigger = '<tab>'
+let g:UltiSnipsJumpBackwardTrigger = '<s-tab>'
+
+" Spell Check
+setlocal spell
+set spelllang=en_us
+inoremap <C-l> <c-g>u<Esc>[s1z=`]a<c-g>u
