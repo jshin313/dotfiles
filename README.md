@@ -12,13 +12,13 @@ $ ./install.sh
 Check out [The Primeagen](https://www.youtube.com/channel/UC8ENHE5xdFSwx71u3fDH5Xw)
 
 ## VIM Plugins
-`:PlugUpdate`: Update Plugins
-`:PlugClean`: Remove unneeded plugins
-`:PlugInstall`: Add plugins
+* `:PlugUpdate` - Update Plugins
+* `:PlugClean` - Remove unneeded plugins
+* `:PlugInstall` -  Add plugins
 
 ## Tmux Plugins
-`<Prefix>I`: Install tmux plugins
-`<Prefix>U`: Update tmux plugins
+* `<Prefix>I`-  Install tmux plugins
+* `<Prefix>U`- Update tmux plugins
 
 ## Terminal Colorscheme
 https://github.com/Gogh-Co/Gogh
