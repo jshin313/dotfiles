@@ -44,8 +44,12 @@ plugins=(
 	* Install the gtk gruvbox colors also found in `install.sh`
 
 ## LaTeX
+* Two nice resources to check out for using vim with LaTeX
+	* https://www.ejmastnak.com/tutorials/vim-latex/intro.html
+	* https://castel.dev/post/lecture-notes-1/
 * I like to comment out these UtilSnips since they get in the way for me
 	* Figures
 	* Tables
+* Vim configurations for tex and markdown are in vim/.vim/ftplugin
 
 

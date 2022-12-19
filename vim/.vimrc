@@ -152,37 +152,18 @@ if executable(s:clip)
     augroup END
 endif
 
-"""""""""""""""""
-" MARKDOWN STUFF
-"""""""""""""""""
+""""""""""""""""
+" FTPLUGIN
+""""""""""""""""
+filetype on             " enable filetype detection
+filetype plugin on      " load file-specific plugins
+filetype indent on      " load file-specific indentation
 
-" Markdown Preview Stuff
-" For regular markdown files
-map <C-s> <Plug>MarkdownPreview
-let g:mkdp_preview_options = {
-            \ 'katex': {
-                \ 	'macros': {
-                    \ 		"\\vb": "\\overrightarrow",
-                    \ 		"\\ev": "\\mathbf",
-                    \ 		"\\cross": "\\times"
-                    \ 	}
-                    \ },
-                    \ }
 
-"""""""""""""""""
-" LATEX
-"""""""""""""""""
-let g:tex_flavor='latex'
-let g:vimtex_view_method='zathura'
-let g:vimtex_quickfix_mode=0
-set conceallevel=1
-let g:tex_conceal='abdmg'
-
-let g:UltiSnipsExpandTrigger = '<tab>'
-let g:UltiSnipsJumpForwardTrigger = '<tab>'
-let g:UltiSnipsJumpBackwardTrigger = '<s-tab>'
-
-" Spell Check
+""""""""""""""""
+" SPELL CHECK
+""""""""""""""""
 setlocal spell
 set spelllang=en_us
 inoremap <C-l> <c-g>u<Esc>[s1z=`]a<c-g>u
+
