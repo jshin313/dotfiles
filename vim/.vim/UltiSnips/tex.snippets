@@ -115,16 +115,14 @@ else:
 `$2
 endsnippet
 
-snippet em "Equation" wA
+snippet em "Equation" w
 \begin{equation}
 ${1:${VISUAL}}
 \end{equation} $0
 endsnippet
 
 snippet dm "Math $$" wA
-$$
-${1:${VISUAL}}
-$$ $0
+$$ ${1:${VISUAL}} $$ $0
 endsnippet
 
 snippet mm "Inline math $ $" A
@@ -275,7 +273,7 @@ snippet conj "conjugate" iA
 endsnippet
 
 snippet sum "sum" w
-\sum_{n=${1:1}}^{${2:\infty}} ${3:a_n z^n}
+\sum_{${1:i}=${2:1}}^{${3:\infty}} ${4:a_n z^n}
 endsnippet
 
 snippet taylor "taylor" w
@@ -650,5 +648,25 @@ endsnippet
 snippet DD "D" iA
 \mathbb{D}
 endsnippet
+
+# Taken from https://github.com/ejmastnak/dotfiles/blob/c79d24987937fa38409f4b4bd66f1ebd2ae7281d/vim/UltiSnips/tex/math.snippets
+snippet "([\W_])wt" "\widetilde" rA
+`!p snip.rv = match.group(1)`\widetilde{${1:${VISUAL:}}}$0
+endsnippet
+
+snippet "([\W_\\])hh" "\hat" rA
+`!p snip.rv = match.group(1)`\hat{${1:${VISUAL:}}}$0
+endsnippet
+
+context "math()"
+snippet "([\W_])vv" "\vec" rA
+`!p snip.rv = match.group(1)`\vec{${1:${VISUAL:}}}$0
+endsnippet
+
+context "math()"
+snippet "([\W_])uv" "\uvec" rA
+`!p snip.rv = match.group(1)`\uvec{${1:${VISUAL:}}}$0
+endsnippet
+
 
 # vim:ft=snippets

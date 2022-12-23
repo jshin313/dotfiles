@@ -78,9 +78,3 @@ rm -rf gruvbox-material-gtk
 # echo "export DISPLAY=\$(ipconfig.exe | awk '/IPv4/ {sub(\"\\\r\",\":0\"); print \$NF;exit}')" >> ~/.zshrc
 # echo "export PULSE_SERVER=\$(ipconfig.exe | awk '/IPv4/ {sub(\"\\\r\",\":0\"); print \$NF;exit}')" >> ~/.zshrc
 # echo "export LIBGL_ALWAYS_INDIRECT=1" >> ~/.zshrc
-
-# LaTeX
-git clone https://github.com/gillescastel/latex-snippets
-mkdir -p ~/.vim/UltiSnips
-cp latex-snippets/tex.snippets ~/.vim/UltiSnips
-rm -rf latex-snippets
