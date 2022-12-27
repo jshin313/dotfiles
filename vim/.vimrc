@@ -13,7 +13,8 @@ syntax on " Syntax highlighting on
 
 set visualbell
 set noerrorbells "No annoying sound effects when you go to the end of a line
-set tabstop=4 softtabstop=4
+set tabstop=4
+set softtabstop=4
 set shiftwidth=4
 " No spaces now: set expandtab "Spaces
 set smartindent "Automatic indenting
@@ -29,21 +30,13 @@ set backupdir-=.
 set backupdir^=~/.vim/backupdir,/tmp
 set undodir=~/.vim/undodir
 set undofile "Undos saved in above
-set hlsearch "Highlight searched items
-set noincsearch
+set nohlsearch "Highlight searched items
+set incsearch
 set colorcolumn=80
-highlight ColorColumn ctermbg=0 guibg=lightgrey
-
-set hidden
-set cmdheight=2 "Better display messages
-
-" Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
-" " delays and poor user experience.
-set updatetime=300
-
-" Enable auto reload of files
-set autoread
-au FocusGained,BufEnter * :checktime
+set scrolloff=8
+set signcolumn=auto
+set updatetime=50
+set termguicolors
 
 """"""""""""""""
 " FTPLUGIN
@@ -119,12 +112,10 @@ noremap <Right> <nop>
 
 """"""""""""""""""
 " CUSTOM REMAPS
+" Most of the remaps below were from the Primeagen
 """"""""""""""""""
-" https://vi.stackexchange.com/a/3877
-" "_ selects the 'blackhole' buffer and D deletes as expected
-nnoremap <Leader>o o<Esc>0"_D
-nnoremap <Leader>O O<Esc>0"_D
 
+nnoremap <leader>u :UndotreeToggle<CR>
 nnoremap <leader>pv :Ex<CR>
 " let g:netrw_browse_split = 2
 " let g:netrw_banner = 0
@@ -133,6 +124,34 @@ nnoremap <leader>pv :Ex<CR>
 " Allows you to move a highlighted line up or down
 vnoremap J :m '>+1<CR>gv=gv 
 vnoremap K :m '<-2<CR>gv=gv 
+
+" Allows for centering of screen when scrolling
+nnoremap <C-d> <C-d>zz
+nnoremap <C-u> <C-u>zz
+
+" Allows for centering of screen when searching
+nnoremap n nzzzv
+nnoremap N Nzzzv
+
+" Allows for pasting without moving deleted text into current buffer
+xnoremap <leader>p "_dP
+
+nnoremap <leader>d "_d
+vnoremap <leader>d "_d
+
+" Quickfix
+nnoremap <C-k> <cmd>cnext<CR>zz
+nnoremap <C-j> <cmd>cprev<CR>zz
+nnoremap <leader>k <cmd>lnext<CR>zz
+nnoremap <leader>j <cmd>lprev<CR>zz
+
+" Cool remap for finding and replacing current word your cursor is on
+nnoremap <leader>s :%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>
+
+" https://vi.stackexchange.com/a/3877
+" "_ selects the 'blackhole' buffer and D deletes as expected
+nnoremap <leader>o o<Esc>0"_D
+nnoremap <leader>O O<Esc>0"_D
 
 """""""""""""""""""""
 " WSL YANK SUPPORT
