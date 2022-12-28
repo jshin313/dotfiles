@@ -64,7 +64,7 @@ Plug 'psliwka/vim-smoothie' "Smooth scrolling
 " Magic. Mainly for faster latex typing
 Plug 'SirVer/ultisnips'
 Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
-Plug 'lervag/vimtex'
+Plug 'lervag/vimtex', { 'for': 'tex' }
 
 " LSP Support
 Plug 'neovim/nvim-lspconfig'

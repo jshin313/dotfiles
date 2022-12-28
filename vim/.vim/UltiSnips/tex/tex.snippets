@@ -668,5 +668,33 @@ snippet "([\W_])uv" "\uvec" rA
 `!p snip.rv = match.group(1)`\uvec{${1:${VISUAL:}}}$0
 endsnippet
 
+# Posfix versions of the above from https://castel.dev/post/lecture-notes-1/#postfix-snippets
+priority 10
+snippet "bar" "bar" riA
+\overline{$1}$0
+endsnippet
+
+priority 100
+snippet "([a-zA-Z])bar" "bar" riA
+\overline{`!p snip.rv=match.group(1)`}
+endsnippet
+
+priority 10
+snippet "hat" "hat" riA
+\hat{$1}$0
+endsnippet
+
+priority 100
+snippet "([a-zA-Z])hat" "hat" riA
+\hat{`!p snip.rv=match.group(1)`}
+endsnippet
+
+snippet "(\\?\w+)(,\.|\.,)" "Vector postfix" riA
+\vec{`!p snip.rv=match.group(1)`}
+endsnippet
+
+snippet "(\\?\w+)wt" "Widetilde postfix" riA
+\widetilde{`!p snip.rv=match.group(1)`}
+endsnippet
 
 # vim:ft=snippets
