@@ -1,3 +1,28 @@
+# Modified by 2022 Jacob Shin
+# A lot of this is copied from https://github.com/gillescastel/latex-snippets/
+
+# Original MIT License
+#
+# Copyright (c) 2019 Gilles Castel
+#
+# Permission is hereby granted, free of charge, to any person obtaining a copy
+# of this software and associated documentation files (the "Software"), to deal
+# in the Software without restriction, including without limitation the rights
+# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+# copies of the Software, and to permit persons to whom the Software is
+# furnished to do so, subject to the following conditions:
+#
+# The above copyright notice and this permission notice shall be included in all
+# copies or substantial portions of the Software.
+#
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+# SOFTWARE.
+
 global !p
 def math():
 	return vim.eval('vimtex#syntax#in_mathzone()') == '1'
@@ -174,6 +199,11 @@ endsnippet
 context "math()"
 snippet '([A-Za-z])_(\d\d)' "auto subscript2" wrA
 `!p snip.rv = match.group(1)`_{`!p snip.rv = match.group(2)`}
+endsnippet
+
+context "math()"
+snippet '(.[A-Za-z])ij' "auto subscript ij index" wrA
+`!p snip.rv = match.group(1)`_{ij}
 endsnippet
 
 
@@ -669,26 +699,6 @@ snippet "([\W_])uv" "\uvec" rA
 endsnippet
 
 # Posfix versions of the above from https://castel.dev/post/lecture-notes-1/#postfix-snippets
-priority 10
-snippet "bar" "bar" riA
-\overline{$1}$0
-endsnippet
-
-priority 100
-snippet "([a-zA-Z])bar" "bar" riA
-\overline{`!p snip.rv=match.group(1)`}
-endsnippet
-
-priority 10
-snippet "hat" "hat" riA
-\hat{$1}$0
-endsnippet
-
-priority 100
-snippet "([a-zA-Z])hat" "hat" riA
-\hat{`!p snip.rv=match.group(1)`}
-endsnippet
-
 snippet "(\\?\w+)(,\.|\.,)" "Vector postfix" riA
 \vec{`!p snip.rv=match.group(1)`}
 endsnippet
