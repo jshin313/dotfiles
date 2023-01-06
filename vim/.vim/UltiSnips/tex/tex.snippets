@@ -261,7 +261,7 @@ snippet pmat "pmat" iA
 endsnippet
 
 snippet bmat "bmat" iA
-\begin{bmatrix} $1 \end{bmatrix} $0
+\begin{bmatrix} $1 \end{bmatrix}$0
 endsnippet
 
 context "math()"
@@ -718,14 +718,12 @@ snippet ind "indices" iA
 \indices{$1}$0
 endsnippet
 
-context "math()"
-snippet "[\W]pdv" "\pdv" rA
-\pdv{${1}}{${2}}$0
+snippet "([\W])pdv" "\pdv" rA
+`!p snip.rv = match.group(1)`\pdv{${1}}{${2}}$0
 endsnippet
 
-context "math()"
-snippet "[\W]dv" "\dv" rA
-\dv{${1}}{${2}}$0
+snippet "([\W])dv" "\dv" rA
+`!p snip.rv = match.group(1)`\dv{${1}}{${2}}$0
 endsnippet
 
 # vim:ft=snippets
