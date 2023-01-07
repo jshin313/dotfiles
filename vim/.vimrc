@@ -175,7 +175,3 @@ inoremap <C-l> <c-g>u<Esc>[s1z=`]a<c-g>u
 " ULTISNIPS
 """"""""""""""""
 let g:python3_host_prog='/usr/bin/python3.9'
-" For some reason, need this
-augroup filetype_tex
-    set filetype=tex
-augroup END

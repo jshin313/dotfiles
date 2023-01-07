@@ -9,9 +9,26 @@ let g:vimtex_quickfix_mode=0
 set conceallevel=1
 let g:tex_conceal='abdmg'
 
+let g:fasttex = 1
+
+if g:fasttex == 1
+	" Fast tex rendering from
+	" https://github.com/ejmastnak/dotfiles
+	function! JumpAndWrite() abort
+		write
+		call UltiSnips#JumpForwards()
+	endfunction
+
+	noremap <C-n> <Cmd>call JumpAndWrite()<CR>
+	inoremap <C-n> <Cmd>call JumpAndWrite()<CR>
+	let g:UltiSnipsJumpForwardTrigger = '<tab>'
+	let g:vimtex_view_method = 'mupdf'
+else
+	let g:UltiSnipsJumpForwardTrigger = '<C-n>'
+endif
+
 let g:UltiSnipsExpandTrigger = '<tab>'
-let g:UltiSnipsJumpForwardTrigger = '<tab>'
-let g:UltiSnipsJumpBackwardTrigger = '<s-tab>'
+let g:UltiSnipsJumpBackwardTrigger = '<c-p>'
 
 " The two below are from 
 " https://www.ejmastnak.com/tutorials/vim-latex/compilation.html#using-vimtexs-compilation-interface
@@ -26,3 +43,4 @@ let g:vimtex_quickfix_ignore_filters = [
       \ 'Package siunitx Warning: Detected the "physics" package:',
       \ 'Package hyperref Warning: Token not allowed in a PDF string',
       \]
+
