@@ -51,5 +51,7 @@ plugins=(
 	* Figures
 	* Tables
 * Vim configurations for tex and markdown are in vim/.vim/ftplugin
+* Need `eval $(dbus-launch --sh-syntax)` in .zshrc for zathura to work
+* Install mupdf.exe for wsl to /opt/mupdf-windows
 
 

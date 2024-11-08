@@ -55,7 +55,6 @@ Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.0' }
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'mbbill/undotree'
-Plug 'ThePrimeagen/harpoon'
 
 Plug 'tpope/vim-commentary', "Comments!
 Plug 'terryma/vim-multiple-cursors' "Multiple Cursors
@@ -71,19 +70,19 @@ Plug 'neovim/nvim-lspconfig'
 Plug 'williamboman/mason.nvim'
 Plug 'williamboman/mason-lspconfig.nvim'
 
-" Autocompletion
-Plug 'hrsh7th/nvim-cmp'
-Plug 'hrsh7th/cmp-buffer'
-Plug 'hrsh7th/cmp-path'
-Plug 'saadparwaiz1/cmp_luasnip'
-Plug 'hrsh7th/cmp-nvim-lsp'
-Plug 'hrsh7th/cmp-nvim-lua'
+" " Autocompletion
+" Plug 'hrsh7th/nvim-cmp'
+" Plug 'hrsh7th/cmp-buffer'
+" Plug 'hrsh7th/cmp-path'
+" Plug 'saadparwaiz1/cmp_luasnip'
+" Plug 'hrsh7th/cmp-nvim-lsp'
+" Plug 'hrsh7th/cmp-nvim-lua'
 
 "  Snippets
-Plug 'L3MON4D3/LuaSnip'
-Plug 'rafamadriz/friendly-snippets'
+" Plug 'L3MON4D3/LuaSnip'
+" Plug 'rafamadriz/friendly-snippets'
 
-Plug 'VonHeikemen/lsp-zero.nvim'
+" Plug 'VonHeikemen/lsp-zero.nvim'
 
 Plug 'ThePrimeagen/vim-be-good', {'do': './install.sh'} "Game for vim
 
@@ -174,4 +173,55 @@ inoremap <C-l> <c-g>u<Esc>[s1z=`]a<c-g>u
 """"""""""""""""
 " ULTISNIPS
 """"""""""""""""
-let g:python3_host_prog='/usr/bin/python3.9'
+let g:python3_host_prog='/usr/bin/python3'
+
+""""""""""""""""
+" LATEX
+""""""""""""""""
+set wrap
+
+let g:tex_flavor='latex'
+" let g:vimtex_view_method='zathura_simple'
+let g:vimtex_quickfix_mode=0
+set conceallevel=1
+let g:tex_conceal='abdmg'
+
+let g:fasttex = 0
+
+if g:fasttex == 1
+	" Fast tex rendering from
+	" https://github.com/ejmastnak/dotfiles
+	function! JumpAndWrite() abort
+		write
+		call UltiSnips#JumpForwards()
+	endfunction
+
+	noremap <C-n> <Cmd>call JumpAndWrite()<CR>
+	inoremap <C-n> <Cmd>call JumpAndWrite()<CR>
+	let g:UltiSnipsJumpForwardTrigger = '<tab>'
+    if has('win32') || (has('unix') && exists('$WSLENV'))
+      let g:vimtex_view_general_viewer = 'mupdf.exe'
+	else
+	  let g:vimtex_view_method = 'mupdf'
+    endif
+
+else
+	let g:UltiSnipsJumpForwardTrigger = '<C-n>'
+endif
+
+let g:UltiSnipsExpandTrigger = '<tab>'
+let g:UltiSnipsJumpBackwardTrigger = '<c-p>'
+
+" The two below are from 
+" https://www.ejmastnak.com/tutorials/vim-latex/compilation.html#using-vimtexs-compilation-interface
+" Don't open QuickFix for warning messages if no errors are present
+let g:vimtex_quickfix_open_on_warning = 0
+" Filter out some compilation warning messages from QuickFix display
+let g:vimtex_quickfix_ignore_filters = [
+      \ 'Underfull \\hbox',
+      \ 'Overfull \\hbox',
+      \ 'LaTeX Warning: .\+ float specifier changed to',
+      \ 'LaTeX hooks Warning',
+      \ 'Package siunitx Warning: Detected the "physics" package:',
+      \ 'Package hyperref Warning: Token not allowed in a PDF string',
+      \]
