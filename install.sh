@@ -15,19 +15,21 @@ sudo apt-get install ripgrep -y
 sudo apt-get install elfutils -y
 sudo apt-get install python3-pip -y
 sudo apt-get install zsh -y
-sudo npm install -g neovim
+npm list neovim -g || sudo npm install -g neovim
 # sudo apt install i3 -y
 sudo apt install texlive-full texlive-latex-recommended -y
 sudo apt install xdotool -y # needed for zathura for latex viewing
 
 # install neovim
-wget https://github.com/neovim/neovim/releases/latest/download/nvim-linux64.tar.gz
-sudo tar xvf nvim-linux64.tar.gz -C /opt
+# wget https://github.com/neovim/neovim/releases/latest/download/nvim-linux64.tar.gz
+wget https://github.com/neovim/neovim/releases/download/stable/nvim-linux-x86_64.tar.gz
+sudo tar xvf nvim-linux-x86_64.tar.gz -C /opt
 rm -rf *.tar.gz
 
 # install oh my zsh
-wget https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh
-sh install.sh
+wget -O zsh_install.sh https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh
+sh zsh_install.sh
+rm zsh_install.sh
 
 rm -rf ~/.zshrc
 
@@ -37,6 +39,8 @@ stow tmux
 stow vim
 stow latexmk
 stow zathura
+
+source ~/.zshrc
 
 # Set up vim directories
 mkdir -p ~/.vim/undodir
@@ -65,6 +69,7 @@ git clone https://github.com/pwndbg/pwndbg ~/.pwndbg
 cd ~/.pwndbg
 chmod +x setup.sh
 ./setup.sh
+
 
 # Below for xfce4 Terminal
 # sudo apt install gtk2-engines-murrine
