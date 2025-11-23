@@ -6,7 +6,7 @@ sudo apt-get install curl
 sudo apt-get install stow -y
 sudo apt-get install vim -y
 
-sudo apt-get install neovim -y
+# sudo apt-get install neovim -y
 sudo apt-get install xdg-utils -y
 sudo apt-get install nodejs -y
 sudo apt-get install npm -y
