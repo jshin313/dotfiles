@@ -106,6 +106,7 @@ source $ZSH/oh-my-zsh.sh
 export PATH=$PATH:/opt/nvim-linux-x86_64/bin
 export PATH=$PATH:/opt/mupdf-windows
 export PATH=/home/jshin/.local/bin:$PATH
+export PATH=/home/jshin/Projects/CEdev/bin:$PATH
 
 # Needed for zathura
 eval $(dbus-launch --sh-syntax)

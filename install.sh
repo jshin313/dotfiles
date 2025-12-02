@@ -38,7 +38,7 @@ stow gdb
 stow tmux
 stow vim
 stow latexmk
-stow zathura
+# stow zathura
 
 source ~/.zshrc
 
