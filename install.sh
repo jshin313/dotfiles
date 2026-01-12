@@ -53,6 +53,8 @@ curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.c
 mkdir -p ~/.config/nvim/
 printf "set runtimepath^=~/.vim runtimepath+=~/.vim/after \nlet &packpath = &runtimepath \nsource ~/.vimrc\n" > ~/.config/nvim/init.vim
 
+python3 -m pip install --upgrade pynvim
+
 nvim +PlugInstall +qall
 nvim +UpdateRemotePlugins +qall
 
