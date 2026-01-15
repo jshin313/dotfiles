@@ -103,8 +103,7 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-export PATH=$PATH:/opt/nvim-linux-x86_64/bin
-export PATH=$PATH:/opt/mupdf-windows
+# export PATH=$PATH:/opt/mupdf-windows
 export PATH=/home/jshin/.local/bin:$PATH
 export PATH=/home/jshin/Projects/CEdev/bin:$PATH
 

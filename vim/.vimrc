@@ -172,7 +172,7 @@ inoremap <C-l> <c-g>u<Esc>[s1z=`]a<c-g>u
 """"""""""""""""
 " ULTISNIPS
 """"""""""""""""
-let g:python3_host_prog='/usr/bin/python3'
+let g:python3_host_prog='/home/jshin/.local/bin/pynvim-python'
 
 """"""""""""""""
 " LATEX
