@@ -1,5 +1,5 @@
 #!/bin/zsh
-if [[ "$UNAME" == "linux" ]]; then
+if [[ "$(uname)" == "linux" ]]; then
 	if [[ "$(awk -F= '/^NAME/{print $2}' /etc/os-release)" == "Ubuntu" ]]; then
 		echo "Detected $UNAME $(/etc/os-release)"
 		sudo apt-get update
